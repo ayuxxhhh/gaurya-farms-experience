@@ -1,46 +1,30 @@
 /* ============================================================
-   Gaurya Farms — WebGL Scrollytelling Experience
-   style.css — Design System & Layout
+   Gaurya Farms — WebGL Scrollytelling
+   style.css — Complete Design System
    ============================================================ */
 
-/* --- Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Jost:wght@300;400;500;600&display=swap');
 
-/* --- CSS Custom Properties --- */
 :root {
-  /* Brand Colors */
-  --color-cream:        #f6ecd2;
-  --color-green-deep:   #35472d;
-  --color-green-dark:   #2f3e2c;
-  --color-gold:         #C4A67D;
-  --color-gold-deep:    #c79a3b;
-  --color-amber:        #E99D0B;
-  --color-amber-rich:   #d4920a;
-  --color-text-dark:    #333333;
-  --color-text-muted:   #6b6b6b;
-  --color-white:        #ffffff;
-  --color-black:        #0a0a0a;
-
-  /* Typography */
+  --color-cream:       #f6ecd2;
+  --color-cream-light: #faf5ea;
+  --color-green-deep:  #35472d;
+  --color-green-dark:  #2f3e2c;
+  --color-gold:        #C4A67D;
+  --color-gold-deep:   #c79a3b;
+  --color-amber:       #E99D0B;
+  --color-amber-rich:  #d4920a;
+  --color-text-dark:   #333333;
+  --color-text-muted:  #7a7a6e;
+  --color-white:       #ffffff;
   --font-heading: 'Playfair Display', serif;
   --font-body:    'Jost', Helvetica, Arial, sans-serif;
-
-  /* Spacing */
-  --section-height: 200vh;
 }
 
-/* --- Reset & Base --- */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
   font-size: 16px;
-  scroll-behavior: auto; /* ScrollTrigger handles this */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -53,141 +37,302 @@ body {
   line-height: 1.6;
 }
 
-/* --- WebGL Canvas --- */
+/* ============================================================
+   CANVAS
+   ============================================================ */
 #webgl-canvas {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
   z-index: 0;
   pointer-events: none;
 }
 
-/* --- Loading Screen --- */
-.loading-screen {
+/* ============================================================
+   GOLD PARTICLES (CSS LAYER)
+   ============================================================ */
+.particles {
   position: fixed;
   inset: 0;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-green-deep);
-  transition: opacity 0.8s ease, visibility 0.8s ease;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.loading-screen.hidden {
+.particle {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: var(--color-gold);
+  border-radius: 50%;
   opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  animation: particleFloat 8s ease-in-out infinite;
 }
+
+@keyframes particleFloat {
+  0%   { opacity: 0; transform: translateY(100vh) scale(0); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+}
+
+/* ============================================================
+   LOADING SCREEN
+   ============================================================ */
+.loading-screen {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: var(--color-green-deep);
+  transition: opacity 1s ease, visibility 1s ease;
+}
+.loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
 .loading-screen__logo {
-  width: clamp(120px, 20vw, 200px);
-  margin-bottom: 2rem;
-  filter: brightness(10); /* make white logo visible on dark bg */
+  width: clamp(100px, 15vw, 160px);
+  margin-bottom: 0.5rem;
+  filter: brightness(10);
+}
+
+.loading-screen__subtitle {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 3rem;
 }
 
 .loading-screen__bar-track {
-  width: clamp(200px, 40vw, 400px);
-  height: 3px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 2rem;
+  width: clamp(180px, 30vw, 300px);
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin-bottom: 0.8rem;
 }
 
 .loading-screen__bar-fill {
   height: 100%;
   width: 0%;
   background: var(--color-gold);
-  border-radius: 2px;
   transition: width 0.3s ease;
+}
+
+.loading-screen__percent {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 2.5rem;
 }
 
 .loading-screen__enter {
   font-family: var(--font-body);
-  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--color-cream);
   background: transparent;
-  border: 1px solid var(--color-gold);
-  padding: 0.8em 2.5em;
+  border: 1px solid rgba(196,166,125,0.4);
+  padding: 0.9em 2.8em;
   cursor: pointer;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.5s ease, transform 0.5s ease,
-              background 0.3s ease, color 0.3s ease;
+  transition: all 0.5s ease;
   pointer-events: none;
 }
+.loading-screen__enter.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.loading-screen__enter:hover { background: var(--color-gold); color: var(--color-green-deep); border-color: var(--color-gold); }
 
-.loading-screen__enter.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2.5rem;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.nav.visible { opacity: 1; transform: translateY(0); }
+
+.nav__logo-img {
+  height: 28px;
+  filter: brightness(0) invert(0.25) sepia(1) saturate(0.4) hue-rotate(60deg);
 }
 
-.loading-screen__enter:hover {
-  background: var(--color-gold);
+.nav__links { display: flex; align-items: center; gap: 2rem; }
+
+.nav__link {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-text-muted);
+  transition: color 0.3s ease;
+}
+.nav__link:hover { color: var(--color-green-deep); }
+
+.nav__link--cta {
+  color: var(--color-cream);
+  background: var(--color-green-deep);
+  padding: 0.5em 1.5em;
+  border-radius: 2px;
+}
+.nav__link--cta:hover { color: var(--color-cream); background: var(--color-green-dark); }
+
+/* ============================================================
+   AUDIO TOGGLE
+   ============================================================ */
+.audio-toggle {
+  position: fixed;
+  top: 1.3rem; right: 12rem;
+  z-index: 100;
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   color: var(--color-green-deep);
+  background: rgba(246,236,210,0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(196,166,125,0.2);
+  border-radius: 100px;
+  padding: 0.5em 1em;
+  cursor: pointer;
 }
+.audio-toggle:hover { background: rgba(246,236,210,0.9); }
 
-/* --- Scroll Sections --- */
-.scroll-section {
-  position: relative;
-  z-index: 1;
-  min-height: var(--section-height);
+.audio-toggle__bars { display: flex; align-items: flex-end; gap: 2px; height: 12px; }
+.audio-toggle__bar { width: 2px; background: var(--color-green-deep); border-radius: 1px; }
+.audio-toggle--playing .audio-toggle__bar { animation: audioBar 0.8s ease-in-out infinite alternate; }
+.audio-toggle__bar:nth-child(1) { height: 3px; animation-delay: 0s; }
+.audio-toggle__bar:nth-child(2) { height: 6px; animation-delay: 0.15s; }
+.audio-toggle__bar:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+.audio-toggle__bar:nth-child(4) { height: 5px; animation-delay: 0.45s; }
+@keyframes audioBar { from { height: 3px; } to { height: 12px; } }
+
+/* ============================================================
+   PROGRESS DOTS
+   ============================================================ */
+.progress-dots {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  gap: 1rem;
+}
+
+.progress-dots__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-gold);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  padding: 0;
+}
+.progress-dots__dot--active {
+  background: var(--color-gold);
+  transform: scale(1.3);
+}
+
+/* ============================================================
+   SCROLL INDICATOR
+   ============================================================ */
+.scroll-indicator {
+  position: fixed;
+  bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0.8rem;
+  opacity: 1;
+  transition: opacity 0.6s ease;
   pointer-events: none;
-  padding: 4rem 2rem;
+}
+.scroll-indicator.hidden { opacity: 0; }
+
+.scroll-indicator__text {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gold);
 }
 
-.scroll-section__content {
-  max-width: 700px;
-  text-align: center;
+.scroll-indicator__line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--color-gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50%      { opacity: 0.3; transform: scaleY(0.6); }
 }
 
-/* Section-specific backgrounds */
-.scroll-section--source {
-  /* Transparent — white fog is rendered in WebGL */
-}
-
-.scroll-section--culturing {
-  /* Transparent */
-}
-
-.scroll-section--churn {
-  /* Transparent */
-}
-
-.scroll-section--clarification {
-  /* Amber gradient handled by JS on <body> */
+/* ============================================================
+   SCROLL SECTIONS
+   ============================================================ */
+.scroll-section {
+  position: relative;
+  z-index: 2;
+  min-height: 200vh;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  padding: 4rem 5vw;
 }
 
 .scroll-section--yield {
   min-height: 100vh;
   justify-content: center;
+  padding: 4rem 2rem;
 }
 
-/* --- Typography & Mask-Reveal Animation --- */
+/* Left/right alternating text placement — leaves jar in center clear */
+.scroll-section__content {
+  max-width: 440px;
+}
 
-/* Heading mask: clip container for the upward reveal */
+.scroll-section__content--left {
+  margin-right: auto;
+  margin-left: 5vw;
+  text-align: left;
+}
+
+.scroll-section__content--right {
+  margin-left: auto;
+  margin-right: 5vw;
+  text-align: left;
+}
+
+/* ============================================================
+   TYPOGRAPHY & MASK-REVEAL
+   ============================================================ */
 .section-heading-mask {
   overflow: hidden;
-  position: relative;
 }
 
 .section-step {
   font-family: var(--font-body);
-  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  font-size: 0.65rem;
   font-weight: 500;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--color-gold);
   margin-bottom: 1rem;
@@ -196,51 +341,60 @@ body {
 
 .section-heading {
   font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 6vw, 5rem);
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
   font-weight: 600;
   font-style: italic;
   line-height: 1.1;
   color: var(--color-green-deep);
   margin-bottom: 1.5rem;
-  /* Initial state for mask-reveal: pushed below the clip */
   transform: translateY(110%);
 }
 
 .section-subheading {
   font-family: var(--font-body);
-  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
   font-weight: 300;
   color: var(--color-text-muted);
-  line-height: 1.8;
-  max-width: 480px;
-  margin: 0 auto;
+  line-height: 1.9;
   letter-spacing: 0.02em;
   opacity: 0;
   transform: translateY(20px);
 }
 
-/* --- CTA Section (The Yield) --- */
+/* Gold accent line */
+.section-line {
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  margin-top: 2rem;
+}
+
+/* ============================================================
+   CTA SECTION (THE YIELD)
+   ============================================================ */
 .cta-block {
   text-align: center;
   pointer-events: auto;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .cta-block__title {
   font-family: var(--font-heading);
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 700;
   font-style: italic;
   color: var(--color-green-deep);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   transform: translateY(110%);
 }
 
 .cta-block__body {
   font-family: var(--font-body);
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
   font-weight: 300;
   color: var(--color-text-muted);
-  line-height: 1.8;
+  line-height: 1.9;
   letter-spacing: 0.02em;
   margin-bottom: 2.5rem;
   opacity: 0;
@@ -254,20 +408,18 @@ body {
 
 .cta-block__tagline {
   font-family: var(--font-body);
-  font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+  font-size: 0.65rem;
   font-weight: 500;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--color-gold);
   margin-bottom: 1rem;
 }
 
 .cta-block__price-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.8rem;
-  margin-bottom: 1.5rem;
+  display: flex; align-items: baseline;
+  justify-content: center; gap: 0.8rem;
+  margin-bottom: 1.8rem;
 }
 
 .cta-block__price {
@@ -279,7 +431,7 @@ body {
 
 .cta-block__price-mrp {
   font-family: var(--font-body);
-  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  font-size: 0.95rem;
   color: var(--color-text-muted);
   text-decoration: line-through;
 }
@@ -287,7 +439,7 @@ body {
 .cta-block__button {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -297,140 +449,114 @@ body {
   border: 2px solid var(--color-green-deep);
   padding: 1.1em 3.5em;
   cursor: pointer;
-  transition: background 0.35s ease, color 0.35s ease,
-              transform 0.25s ease, box-shadow 0.35s ease;
+  transition: all 0.35s ease;
 }
-
 .cta-block__button:hover {
   background: transparent;
   color: var(--color-green-deep);
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(53, 71, 45, 0.15);
+  box-shadow: 0 8px 30px rgba(53,71,45,0.15);
 }
 
-/* --- Audio Toggle --- */
-.audio-toggle {
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 100;
+/* Trust badges */
+.trust-badges {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--color-green-deep);
-  background: rgba(246, 236, 210, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(196, 166, 125, 0.3);
-  border-radius: 100px;
-  padding: 0.6em 1.2em;
-  cursor: pointer;
-  pointer-events: auto;
-  transition: background 0.3s ease;
-}
-
-.audio-toggle:hover {
-  background: rgba(246, 236, 210, 0.95);
-}
-
-.audio-toggle__icon {
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
   justify-content: center;
-}
-
-.audio-toggle__bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 2px;
-  height: 14px;
-}
-
-.audio-toggle__bar {
-  width: 2px;
-  background: var(--color-green-deep);
-  border-radius: 1px;
-  transition: height 0.2s ease;
-}
-
-.audio-toggle--playing .audio-toggle__bar {
-  animation: audioBar 0.8s ease-in-out infinite alternate;
-}
-
-.audio-toggle__bar:nth-child(1) { height: 4px; animation-delay: 0s; }
-.audio-toggle__bar:nth-child(2) { height: 8px; animation-delay: 0.15s; }
-.audio-toggle__bar:nth-child(3) { height: 12px; animation-delay: 0.3s; }
-.audio-toggle__bar:nth-child(4) { height: 6px; animation-delay: 0.45s; }
-
-@keyframes audioBar {
-  from { height: 3px; }
-  to   { height: 14px; }
-}
-
-/* --- Scroll Indicator --- */
-.scroll-indicator {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  opacity: 1;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-
-.scroll-indicator.hidden {
+  gap: 2rem;
+  margin-top: 3rem;
   opacity: 0;
 }
 
-.scroll-indicator__text {
+.trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.trust-badge__icon { font-size: 1.3rem; }
+
+.trust-badge__text {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  position: relative;
+  z-index: 5;
+  background: var(--color-green-deep);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer__inner { max-width: 600px; margin: 0 auto; }
+
+.footer__brand {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-cream);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.footer__copy {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: rgba(246,236,210,0.4);
+  margin-bottom: 1.5rem;
+}
+
+.footer__links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.footer__links a {
   font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  text-decoration: none;
   color: var(--color-gold);
+  transition: color 0.3s ease;
 }
+.footer__links a:hover { color: var(--color-cream); }
 
-.scroll-indicator__arrow {
-  width: 20px;
-  height: 20px;
-  border-right: 1.5px solid var(--color-gold);
-  border-bottom: 1.5px solid var(--color-gold);
-  transform: rotate(45deg);
-  animation: scrollBounce 2s ease-in-out infinite;
-}
-
-@keyframes scrollBounce {
-  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 1; }
-  50%      { transform: rotate(45deg) translateY(8px); opacity: 0.4; }
-}
-
-/* --- Responsive --- */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 768px) {
-  .scroll-section {
-    padding: 3rem 1.5rem;
+  .scroll-section { padding: 3rem 1.5rem; }
+
+  .scroll-section__content--left,
+  .scroll-section__content--right {
+    margin: 0 auto;
+    text-align: center;
+    max-width: 90vw;
   }
 
-  .audio-toggle {
-    top: 1rem;
-    right: 1rem;
-    font-size: 0;         /* Hide text on mobile, show icon only */
-    padding: 0.6em 0.8em;
-  }
+  .nav { padding: 1rem 1.2rem; }
+  .nav__links { gap: 1rem; }
+  .nav__link { font-size: 0.65rem; }
 
-  .audio-toggle__label {
-    display: none;
-  }
+  .audio-toggle { right: auto; left: 1rem; top: auto; bottom: 1rem; font-size: 0; padding: 0.5em 0.7em; }
+  .audio-toggle__label { display: none; }
+
+  .progress-dots { right: 0.8rem; }
+
+  .trust-badges { flex-wrap: wrap; gap: 1rem; }
+
+  .footer__links { gap: 1rem; }
 }
