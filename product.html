@@ -142,7 +142,23 @@
         </div>
     </main>
 
-    <!-- FOOTER -->
+            <!-- MINI GAME: CATCH THE GHEE -->
+        <section class="py-24 bg-[#111111] text-center border-t border-white/5 relative z-10 mt-20">
+            <div class="max-w-4xl mx-auto px-6">
+                <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold mb-2">A Moment of Play</p>
+                <h2 class="font-serif text-4xl text-alabaster mb-4">Catch the <span class="text-gold italic">Golden Drops</span></h2>
+                <p class="text-sm text-muted mb-10 font-light">Move your mouse or swipe left/right to catch the pure Bilona Ghee drops!</p>
+                <div class="relative w-full max-w-[600px] h-[400px] mx-auto border-2 border-gold/30 rounded-lg overflow-hidden bg-[#1A1A1A] shadow-[0_0_30px_rgba(197,160,89,0.15)]">
+                    <canvas id="catchCanvas" width="600" height="400" class="w-full h-full cursor-none block"></canvas>
+                    <div id="catchOverlay" class="absolute inset-0 bg-black/80 flex items-center justify-center flex-col z-10 cursor-pointer transition-opacity duration-300">
+                        <span class="text-gold text-3xl font-serif italic mb-4" id="catchTitle">Click to Start</span>
+                        <span class="text-white/70 text-lg font-light" id="catchScoreText">High Score: 0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
     <footer class="bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6 mt-12">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div class="md:col-span-1">
@@ -260,6 +276,9 @@
             setTimeout(showRewardModal, 2000);
         }
     </script>
+<script src="assets/js/minigames.js"></script>
 </body>
 </html>
+
+
 
