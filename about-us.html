@@ -46,9 +46,7 @@
     <!-- Header Navigation -->
     <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="font-serif italic text-2xl tracking-wider font-bold text-alabaster hover:text-gold transition-colors">
-                Gaurya Farms.
-            </a>
+            <a href="index.html" class="flex-shrink-0 inline-block"><img src="assets/images/logo.png" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
             <div class="hidden md:flex space-x-8 items-center">
                 <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Home</a>
                 <a href="https://gauryafarms.com/collections/all" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Shop</a>
@@ -93,16 +91,48 @@
             </div>
         </div>
 
-        <!-- Section 3: The Cows -->
-        <div class="max-w-4xl mx-auto text-center space-y-8 mb-32 reveal-up">
-            <h2 class="font-serif text-4xl leading-tight">Revering the <span class="italic text-gold">Gir Cow.</span></h2>
-            <div class="space-y-6 text-muted font-light text-lg leading-relaxed text-left md:text-center">
+        <!-- Section 3: The Cows (Updated with cow-calf.jpg) -->
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 mb-32 items-center reveal-up">
+            <div class="order-2 md:order-1 img-mask h-full min-h-[400px]">
+                <img src="assets/images/cow-calf.jpg" alt="Gir Cow and Calf" class="w-full h-full object-cover parallax-img" data-speed="0.8">
+            </div>
+            <div class="order-1 md:order-2 space-y-8 text-left">
+                <h2 class="font-serif text-4xl leading-tight text-alabaster">Revering the <br><span class="italic text-gold">Gir Cow.</span></h2>
+                <div class="space-y-6 text-muted font-light text-lg leading-relaxed">
+                    <p>
+                        Our indigenous Gir cows are not livestock; they are the heart of our community. They graze freely on organic pastures under the Rajasthani sun. We follow the ancient 'Dohan' system—where the calf always receives its share of milk first, and only the surplus is taken for churning.
+                    </p>
+                    <p>
+                        This ethical, cruelty-free approach ensures that the milk is given out of abundance and love, translating into the high vibrational quality and medicinal properties of our final Bilona Ghee.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 4: A Note From Our Founders (Updated with farmer-selfie.jpg) -->
+        <div class="max-w-5xl mx-auto border-t border-white/5 pt-24 mt-24 mb-16 text-center reveal-up">
+            <svg class="w-10 h-10 text-gold/40 mx-auto mb-10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+            <div class="space-y-8 text-xl md:text-2xl font-serif leading-relaxed text-alabaster max-w-4xl mx-auto">
                 <p>
-                    Our indigenous Gir cows are not livestock; they are the heart of our community. They graze freely on organic pastures under the Rajasthani sun. We follow the ancient 'Dohan' system—where the calf always receives its share of milk first, and only the surplus is taken for churning.
+                    <span class="italic">"When did we all agree that 'faster' was better when it comes to the food we feed our families?</span>
+                </p>
+                <p class="text-white/80">
+                    <span class="italic">Somewhere along the line, India was convinced that a factory-processed tub from a supermarket shelf was the same as what our Dadis and Nanis made with their hands. But deep down, every time you smell real, golden, slow-churned ghee, you know the difference.</span>
+                </p>
+                <p class="text-white/80">
+                    <span class="italic">We didn't start Gaurya Farms to give you a sustainability lecture or a wellness sermon. We started it as friends who went back to the village, unlearned the shortcuts, understood the science, and brought the original stuff back.</span>
                 </p>
                 <p>
-                    This ethical, cruelty-free approach ensures that the milk is given out of abundance and love, translating into the high vibrational quality and medicinal properties of our final Bilona Ghee.
+                    <span class="italic">You know better, and now you can do better. Here’s to bringing the soul back to your kitchen."</span>
                 </p>
+            </div>
+            <div class="mt-16 flex flex-col items-center">
+                <div class="w-20 h-20 rounded-full overflow-hidden mb-6 border-2 border-gold/30">
+                    <img src="assets/images/farmer-selfie.jpg" alt="Gaurya Farms Founders" class="w-full h-full object-cover">
+                </div>
+                <div class="w-12 h-[1px] bg-gold mx-auto mb-4"></div>
+                <p class="text-xs tracking-[0.3em] uppercase text-gold font-bold">The Founders</p>
+                <p class="text-sm text-muted font-light mt-2">Gaurya Farms</p>
             </div>
         </div>
         
@@ -112,7 +142,7 @@
     <footer class="bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div class="md:col-span-1">
-                <h3 class="font-serif italic text-2xl font-bold text-gold mb-6">Gaurya Farms.</h3>
+                <img src="assets/images/logo.png" alt="Gaurya Farms" class="h-12 md:h-16 object-contain mb-6">
                 <p class="text-sm text-muted leading-relaxed font-light mb-6">Ancestral preservation in a jar.<br>100% pure A2 Gir cow bilona ghee, made ethically on our own farm.</p>
             </div>
             <div>
@@ -152,3 +182,4 @@
     </script>
 </body>
 </html>
+
