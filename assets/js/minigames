@@ -1,0 +1,292 @@
+// minigames.js
+
+function initFlappyCow() {
+    const canvas = document.getElementById('flappyCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const overlay = document.getElementById('flappyOverlay');
+    const title = document.getElementById('flappyTitle');
+    const scoreText = document.getElementById('flappyScoreText');
+
+    let frames = 0, score = 0, best = 0;
+    let state = { current: 0, getReady: 0, game: 1, over: 2 };
+    
+    // Cow Object
+    const cow = {
+        x: 50, y: 150, w: 34, h: 24,
+        gravity: 0.25, jump: 4.6, speed: 0,
+        draw: function() {
+            ctx.fillStyle = '#c5a059'; // Gold Cow
+            ctx.fillRect(this.x, this.y, this.w, this.h);
+            // Cow details
+            ctx.fillStyle = '#fff'; ctx.fillRect(this.x+24, this.y+4, 6, 6); // Eye
+            ctx.fillStyle = '#111'; ctx.fillRect(this.x+26, this.y+6, 2, 2); // Pupil
+        },
+        flap: function() { this.speed = -this.jump; },
+        update: function() {
+            this.speed += this.gravity;
+            this.y += this.speed;
+            if (this.y + this.h >= canvas.height || this.y < 0) {
+                state.current = state.over;
+            }
+        },
+        reset: function() { this.y = 150; this.speed = 0; }
+    };
+
+    const pipes = {
+        position: [], w: 40, gap: 110, dx: 2,
+        draw: function() {
+            for(let i=0; i < this.position.length; i++) {
+                let p = this.position[i];
+                let topY = p.y;
+                let bottomY = p.y + this.gap;
+                ctx.fillStyle = '#8C8C8C'; // Fences
+                ctx.fillRect(p.x, 0, this.w, topY);
+                ctx.fillRect(p.x, bottomY, this.w, canvas.height - bottomY);
+            }
+        },
+        update: function() {
+            if(frames % 100 == 0) {
+                this.position.push({ x: canvas.width, y: Math.max(50, Math.random() * (canvas.height - this.gap - 50)) });
+            }
+            for(let i=0; i < this.position.length; i++) {
+                let p = this.position[i];
+                p.x -= this.dx;
+                // Collision
+                if (cow.x + cow.w > p.x && cow.x < p.x + this.w && 
+                   (cow.y < p.y || cow.y + cow.h > p.y + this.gap)) {
+                    state.current = state.over;
+                }
+                if(p.x + this.w < 0) {
+                    this.position.shift();
+                    score++;
+                    best = Math.max(score, best);
+                }
+            }
+        },
+        reset: function() { this.position = []; }
+    };
+
+    function draw() {
+        ctx.fillStyle = '#1A1A1A'; ctx.fillRect(0, 0, canvas.width, canvas.height); // BG
+        pipes.draw();
+        cow.draw();
+        ctx.fillStyle = '#fff'; ctx.font = '24px serif'; ctx.fillText(score, 10, 30);
+    }
+    
+    function update() {
+        if(state.current === state.game) {
+            cow.update(); pipes.update();
+        } else if (state.current === state.over) {
+            overlay.style.opacity = '1';
+            overlay.style.pointerEvents = 'auto';
+            title.innerText = "Game Over";
+            scoreText.innerText = "Score: " + score + " | High: " + best;
+        }
+    }
+    
+    function loop() { draw(); update(); frames++; requestAnimationFrame(loop); }
+    
+    function jump() {
+        if(state.current === state.getReady || state.current === state.over) {
+            state.current = state.game;
+            cow.reset(); pipes.reset(); score = 0;
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none';
+        }
+        cow.flap();
+    }
+    
+    canvas.addEventListener('mousedown', jump);
+    document.addEventListener('keydown', (e) => { if(e.code === 'Space') jump(); });
+    overlay.addEventListener('mousedown', jump);
+    loop();
+}
+
+function initCatchGhee() {
+    const canvas = document.getElementById('catchCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const overlay = document.getElementById('catchOverlay');
+    const title = document.getElementById('catchTitle');
+    const scoreText = document.getElementById('catchScoreText');
+
+    let state = { game: 1, over: 2, current: 0 };
+    let score = 0, best = 0, lives = 3;
+    let drops = [];
+    
+    const bucket = { x: 250, y: 350, w: 60, h: 40 };
+
+    canvas.addEventListener('mousemove', (e) => {
+        let rect = canvas.getBoundingClientRect();
+        bucket.x = e.clientX - rect.left - bucket.w/2;
+    });
+
+    function addDrop() {
+        drops.push({ x: Math.random() * (canvas.width - 20) + 10, y: -20, radius: 8, speed: 2 + Math.random()*3 });
+    }
+
+    function draw() {
+        ctx.fillStyle = '#1A1A1A'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw Bucket (Pot)
+        ctx.fillStyle = '#8C8C8C';
+        ctx.beginPath();
+        ctx.moveTo(bucket.x, bucket.y);
+        ctx.lineTo(bucket.x + bucket.w, bucket.y);
+        ctx.lineTo(bucket.x + bucket.w - 10, bucket.y + bucket.h);
+        ctx.lineTo(bucket.x + 10, bucket.y + bucket.h);
+        ctx.fill();
+
+        // Draw Drops
+        ctx.fillStyle = '#c5a059';
+        for(let d of drops) {
+            ctx.beginPath(); ctx.arc(d.x, d.y, d.radius, 0, Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.moveTo(d.x - d.radius, d.y); ctx.lineTo(d.x, d.y - d.radius*2); ctx.lineTo(d.x + d.radius, d.y); ctx.fill();
+        }
+
+        // UI
+        ctx.fillStyle = '#fff'; ctx.font = '20px serif';
+        ctx.fillText("Score: " + score, 10, 30);
+        ctx.fillText("Lives: " + lives, canvas.width - 80, 30);
+    }
+
+    function update() {
+        if(state.current !== state.game) return;
+        
+        if(Math.random() < 0.03 + (score * 0.001)) addDrop(); // Gets harder
+
+        for(let i = drops.length-1; i >= 0; i--) {
+            let d = drops[i];
+            d.y += d.speed;
+            
+            // Catch
+            if (d.y + d.radius >= bucket.y && d.y <= bucket.y + bucket.h && d.x >= bucket.x && d.x <= bucket.x + bucket.w) {
+                score++; drops.splice(i, 1);
+            } 
+            // Miss
+            else if (d.y > canvas.height) {
+                drops.splice(i, 1);
+                lives--;
+                if(lives <= 0) {
+                    state.current = state.over;
+                    best = Math.max(score, best);
+                    overlay.style.opacity = '1';
+                    overlay.style.pointerEvents = 'auto';
+                    title.innerText = "Game Over";
+                    scoreText.innerText = "Score: " + score + " | High: " + best;
+                }
+            }
+        }
+    }
+
+    function loop() { draw(); update(); requestAnimationFrame(loop); }
+    
+    function start() {
+        state.current = state.game; score = 0; lives = 3; drops = [];
+        overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none';
+    }
+    overlay.addEventListener('mousedown', start);
+    loop();
+}
+
+function initWhackCow() {
+    const canvas = document.getElementById('whackCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const overlay = document.getElementById('whackOverlay');
+    const title = document.getElementById('whackTitle');
+    const scoreText = document.getElementById('whackScoreText');
+
+    let state = { game: 1, over: 2, current: 0 };
+    let score = 0, best = 0, timer = 30;
+    
+    let holes = [];
+    for(let r=0; r<3; r++) {
+        for(let c=0; c<3; c++) {
+            holes.push({ x: 100 + c*150, y: 100 + r*100, r: 40, active: 0, timer: 0 });
+        }
+    }
+
+    let lastTime = Date.now();
+
+    canvas.addEventListener('mousedown', (e) => {
+        if(state.current !== state.game) return;
+        let rect = canvas.getBoundingClientRect();
+        let mx = e.clientX - rect.left;
+        let my = e.clientY - rect.top;
+        
+        for(let h of holes) {
+            if(h.active > 0) {
+                let dx = mx - (h.x + 40);
+                let dy = my - (h.y + 40);
+                if (Math.sqrt(dx*dx + dy*dy) < h.r) {
+                    score++; h.active = 0; // Whacked!
+                }
+            }
+        }
+    });
+
+    function draw() {
+        ctx.fillStyle = '#1A1A1A'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        for(let h of holes) {
+            ctx.fillStyle = '#333';
+            ctx.beginPath(); ctx.arc(h.x + 40, h.y + 40, h.r, 0, Math.PI*2); ctx.fill(); // Hole
+            if(h.active > 0) {
+                ctx.fillStyle = '#c5a059';
+                ctx.beginPath(); ctx.arc(h.x + 40, h.y + 40 - h.active*30, 20, 0, Math.PI*2); ctx.fill(); // Cow head
+                ctx.fillStyle = '#fff'; ctx.fillRect(h.x+32, h.y+26 - h.active*30, 4, 4); ctx.fillRect(h.x+44, h.y+26 - h.active*30, 4, 4); // Eyes
+            }
+        }
+
+        ctx.fillStyle = '#fff'; ctx.font = '20px serif';
+        ctx.fillText("Score: " + score, 10, 30);
+        ctx.fillText("Time: " + Math.ceil(timer), canvas.width - 100, 30);
+    }
+
+    function update() {
+        if(state.current !== state.game) return;
+        let now = Date.now();
+        let dt = (now - lastTime)/1000;
+        lastTime = now;
+        timer -= dt;
+
+        if(timer <= 0) {
+            state.current = state.over; best = Math.max(score, best);
+            overlay.style.opacity = '1'; overlay.style.pointerEvents = 'auto';
+            title.innerText = "Time's Up!";
+            scoreText.innerText = "Score: " + score + " | High: " + best;
+            return;
+        }
+
+        // Random popups
+        if(Math.random() < 0.05) {
+            let h = holes[Math.floor(Math.random() * holes.length)];
+            if(h.active === 0) { h.active = 1; h.timer = 1.0; } // Active for 1s
+        }
+
+        for(let h of holes) {
+            if(h.active > 0) {
+                h.timer -= dt;
+                if(h.timer <= 0) h.active = 0;
+            }
+        }
+    }
+
+    function loop() { draw(); update(); requestAnimationFrame(loop); }
+    
+    function start() {
+        state.current = state.game; score = 0; timer = 30; lastTime = Date.now();
+        for(let h of holes) h.active = 0;
+        overlay.style.opacity = '0'; overlay.style.pointerEvents = 'none';
+    }
+    overlay.addEventListener('mousedown', start);
+    loop();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    initFlappyCow();
+    initCatchGhee();
+    initWhackCow();
+});
