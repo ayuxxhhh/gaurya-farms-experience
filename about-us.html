@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Gaurya Farms</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Inter"', 'sans-serif'] },
+                    colors: { charcoal: '#1A1A1A', alabaster: '#FAF9F6', gold: '#C5A059', muted: '#8C8C8C' }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { background-color: #1A1A1A; color: #FAF9F6; cursor: none; overflow-x: hidden; }
+        ::selection { background-color: #C5A059; color: white; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 6px; height: 6px; background-color: #C5A059; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(197, 160, 89, 0.4); transition: width 0.2s, height 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(197, 160, 89, 0.1); border-color: transparent; }
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .reveal-up { opacity: 0; transform: translateY(30px); }
+    </style>
+</head>
+<body class="font-sans antialiased text-alabaster">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Header Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5 opacity-0 animate-fade-in" style="animation: fadeIn 1s forwards 0.5s;">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-serif italic text-2xl tracking-wider font-bold text-alabaster hover:text-gold transition-colors">
+                Gaurya Farms.
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="https://gauryafarms.com/collections/all" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Shop</a>
+                <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Our Story</a>
+                <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Contact</a>
+                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-24 px-6 min-h-screen flex flex-col justify-center">
+        <div class="max-w-3xl mx-auto text-center space-y-8">
+            <p class="text-gold tracking-[0.3em] uppercase text-xs font-medium reveal-up">Our Heritage</p>
+            <h1 class="font-serif text-5xl md:text-7xl leading-tight reveal-up">Ancestral <br><span class="italic text-gold">Preservation.</span></h1>
+            <div class="w-[1px] h-24 bg-gold mx-auto reveal-up origin-top"></div>
+            
+            <div class="space-y-6 text-muted font-light text-lg leading-relaxed text-left reveal-up">
+                <p>
+                    We don't sell a traditional life as a marketing gimmick. We invite you to support a lifestyle we never abandoned. 
+                    At Gaurya Farms, located in the heart of Chittorgarh, Rajasthan, our mission is to preserve the sacred bond between humanity, nature, and the indigenous Gir cow.
+                </p>
+                <p>
+                    For generations, our family has practiced the Bilona method—not because it became a trend, but because it is the only way we know how to honor the milk. It is a slow, methodical, and profoundly spiritual process that demands patience and uncompromising dedication.
+                </p>
+                <p>
+                    When you experience our ghee, you aren't just tasting a product; you are tasting centuries of preserved heritage, forged in warmth and crafted with absolute integrity.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div class="md:col-span-1">
+                <h3 class="font-serif italic text-2xl font-bold text-gold mb-6">Gaurya Farms.</h3>
+                <p class="text-sm text-muted leading-relaxed font-light mb-6">Ancestral preservation in a jar.<br>100% pure A2 Gir cow bilona ghee, made ethically on our own farm.</p>
+            </div>
+            <div>
+                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Shop</h4>
+                <ul class="space-y-4 text-sm font-light text-muted">
+                    <li><a href="https://gauryafarms.com/collections/all" class="hover:text-gold transition-colors">All Products</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Support</h4>
+                <ul class="space-y-4 text-sm font-light text-muted">
+                    <li><a href="contact.html" class="hover:text-gold transition-colors">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Contact</h4>
+                <ul class="space-y-4 text-sm font-light text-muted">
+                    <li><span class="block text-alabaster mb-1">Farm Address</span>Chittorgarh, Rajasthan 312001</li>
+                    <li class="pt-2"><span class="block text-alabaster mb-1">Phone</span><a href="tel:+918503830383" class="hover:text-gold transition-colors">+91-8503830383</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+        const lenis = new Lenis({ duration: 1.2, smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        
+        gsap.to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.15, delay: 0.5 });
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Gaurya Farms</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Inter"', 'sans-serif'] },
+                    colors: { charcoal: '#1A1A1A', alabaster: '#FAF9F6', gold: '#C5A059', muted: '#8C8C8C' }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { background-color: #1A1A1A; color: #FAF9F6; cursor: none; overflow-x: hidden; }
+        ::selection { background-color: #C5A059; color: white; }
+        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+        .cursor-dot { width: 6px; height: 6px; background-color: #C5A059; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(197, 160, 89, 0.4); transition: width 0.2s, height 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline, input:focus ~ .cursor-outline, textarea:focus ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(197, 160, 89, 0.1); border-color: transparent; }
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        
+        .input-field { background: transparent; border-bottom: 1px solid rgba(255,255,255,0.2); outline: none; padding: 0.75rem 0; color: #FAF9F6; font-weight: 300; transition: border-color 0.3s; width: 100%; }
+        .input-field:focus { border-color: #C5A059; }
+        .reveal-up { opacity: 0; transform: translateY(30px); }
+    </style>
+</head>
+<body class="font-sans antialiased text-alabaster">
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- Header Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5 opacity-0 animate-fade-in" style="animation: fadeIn 1s forwards 0.5s;">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-serif italic text-2xl tracking-wider font-bold text-alabaster hover:text-gold transition-colors">
+                Gaurya Farms.
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="https://gauryafarms.com/collections/all" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Shop</a>
+                <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Our Story</a>
+                <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Contact</a>
+                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-24 px-6 min-h-screen flex items-center">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="space-y-8">
+                <p class="text-gold tracking-[0.3em] uppercase text-xs font-medium reveal-up">Get in Touch</p>
+                <h1 class="font-serif text-5xl md:text-7xl leading-tight reveal-up">Contact<br><span class="italic text-gold">Us.</span></h1>
+                <div class="w-[1px] h-12 bg-gold reveal-up origin-top"></div>
+                <div class="space-y-6 text-muted font-light text-lg reveal-up">
+                    <p>Have questions about our ancestral process or an existing order? We are here to assist you.</p>
+                    <div class="pt-4 space-y-4">
+                        <div>
+                            <span class="block text-xs tracking-widest uppercase text-alabaster font-bold mb-1">Visit The Farm</span>
+                            Jalday Vibhag Ke Store Pass, Tejaji Ka Chouk Road, Pratap Nagar, Chittorgarh, Rajasthan 312001
+                        </div>
+                        <div>
+                            <span class="block text-xs tracking-widest uppercase text-alabaster font-bold mb-1">Direct Line</span>
+                            <a href="tel:+918503830383" class="hover:text-gold transition-colors">+91-8503830383</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#151515] p-8 md:p-12 border border-white/5 reveal-up">
+                <form class="space-y-8" action="#" method="POST" onsubmit="event.preventDefault(); alert('This is a prototype form. In production, this would send an email.');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <label class="block text-xs tracking-widest uppercase text-muted mb-2">First Name</label>
+                            <input type="text" class="input-field" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs tracking-widest uppercase text-muted mb-2">Last Name</label>
+                            <input type="text" class="input-field" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs tracking-widest uppercase text-muted mb-2">Email Address</label>
+                        <input type="email" class="input-field" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs tracking-widest uppercase text-muted mb-2">Message</label>
+                        <textarea class="input-field h-24 resize-none" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full border border-gold text-gold hover:bg-gold hover:text-charcoal transition-colors duration-300 py-4 tracking-[0.2em] uppercase text-sm font-medium">
+                        Send Inquiry
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+        const lenis = new Lenis({ duration: 1.2, smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        
+        gsap.to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.1, delay: 0.2 });
+    </script>
+</body>
+</html>
