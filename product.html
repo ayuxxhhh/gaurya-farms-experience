@@ -45,9 +45,7 @@
     <!-- Header Navigation -->
     <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="font-serif italic text-2xl tracking-wider font-bold text-alabaster hover:text-gold transition-colors">
-                Gaurya Farms.
-            </a>
+            <a href="index.html" class="flex-shrink-0 inline-block"><img src="assets/images/logo.png" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
             <div class="hidden md:flex space-x-8 items-center">
                 <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Home</a>
                 <a href="product.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Shop</a>
@@ -65,7 +63,7 @@
             <!-- Left Side: Sticky Product Image -->
             <div class="w-full lg:w-1/2 relative">
                 <div class="sticky top-32 w-full h-[70vh] bg-[#151515] overflow-hidden reveal-up">
-                    <img src="assets/images/Gemini_Generated_Image_hro7yahro7yahro7.png" alt="A2 Bilona Ghee Jar" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-1000">
+                    <img src="assets/images/product-jar-wood.jpg" alt="Gaurya Farms A2 Gir Cow Ghee" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-1000">
                 </div>
             </div>
 
@@ -94,8 +92,12 @@
                     </ul>
                 </div>
 
-                <!-- Purchase Action -->
-                <div class="space-y-6 pt-6 reveal-up">
+                <div class="space-y-6 pt-6 reveal-up relative">
+                    <!-- Gamification Drop #2 -->
+                    <div class="absolute -top-4 right-10 cursor-crosshair drop-gamification" id="drop-2" onclick="collectDrop('drop-2', this)" title="Collect Drop">
+                        <svg class="w-6 h-6 text-gold animate-pulse hover:scale-125 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.5c-3.59 0-6.5-2.91-6.5-6.5 0-3.35 4.39-9.92 5.92-12.08.28-.39.87-.39 1.15 0 1.53 2.16 5.93 8.73 5.93 12.08 0 3.59-2.91 6.5-6.5 6.5z"/></svg>
+                    </div>
+
                     <p class="text-xs uppercase tracking-widest text-alabaster font-bold">Quantity</p>
                     <div class="flex space-x-4">
                         <div class="flex border border-white/20">
@@ -144,7 +146,7 @@
     <footer class="bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6 mt-12">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
             <div class="md:col-span-1">
-                <h3 class="font-serif italic text-2xl font-bold text-gold mb-6">Gaurya Farms.</h3>
+                <img src="assets/images/logo.png" alt="Gaurya Farms" class="h-12 md:h-16 object-contain mb-6">
                 <p class="text-sm text-muted leading-relaxed font-light mb-6">Ancestral preservation in a jar.<br>100% pure A2 Gir cow bilona ghee, made ethically on our own farm.</p>
             </div>
             <div>
@@ -168,6 +170,24 @@
             </div>
         </div>
     </footer>
+
+    <!-- REWARD MODAL (Gamification) -->
+    <div id="reward-modal" class="fixed inset-0 z-[100] bg-[#111111]/90 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-1000">
+        <div class="bg-[#1A1A1A] border border-gold p-12 max-w-lg text-center shadow-[0_0_50px_rgba(197,160,89,0.2)] rounded-sm transform scale-95 transition-transform duration-1000" id="reward-box">
+            <svg class="w-16 h-16 text-gold mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.5c-3.59 0-6.5-2.91-6.5-6.5 0-3.35 4.39-9.92 5.92-12.08.28-.39.87-.39 1.15 0 1.53 2.16 5.93 8.73 5.93 12.08 0 3.59-2.91 6.5-6.5 6.5z"/></svg>
+            <h2 class="font-serif text-3xl mb-4 text-gold italic">The Artisan's Secret</h2>
+            <p class="text-muted font-light mb-8">You have found all 3 Golden Drops hidden across our farm. As a reward for your curiosity, enjoy 10% off your first batch.</p>
+            <div class="border border-gold/30 bg-[#151515] py-4 px-8 inline-block mb-8">
+                <span class="text-2xl font-mono text-alabaster tracking-widest select-all">ANCESTRAL10</span>
+            </div>
+            <br>
+            <button onclick="closeReward()" class="text-xs tracking-widest uppercase text-muted hover:text-gold transition-colors">Close</button>
+        </div>
+    </div>
+
+    <style>
+        .drop-gamification.found { display: none !important; }
+    </style>
 
     <script>
         const cursorDot = document.getElementById('cursor-dot');
@@ -193,6 +213,53 @@
                 icon.textContent = '-';
             }
         }
+
+        // Gamification Logic: The Golden Drop Hunt
+        let foundDrops = JSON.parse(localStorage.getItem('gauryaDrops') || '[]');
+        
+        if(foundDrops.includes('drop-1')) document.getElementById('drop-1')?.classList.add('found');
+        if(foundDrops.includes('drop-2')) document.getElementById('drop-2')?.classList.add('found');
+        if(foundDrops.includes('drop-3')) document.getElementById('drop-3')?.classList.add('found');
+
+        function collectDrop(id, element) {
+            if(!foundDrops.includes(id)) {
+                foundDrops.push(id);
+                localStorage.setItem('gauryaDrops', JSON.stringify(foundDrops));
+                
+                gsap.to(element, { scale: 3, opacity: 0, duration: 0.6, ease: "back.in" });
+                
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-10 right-10 bg-[#1A1A1A] border border-gold text-gold px-6 py-4 font-serif italic text-lg z-[9999] opacity-0 shadow-lg';
+                toast.innerHTML = `<span class="font-sans text-xs uppercase tracking-widest block text-muted mb-1 font-bold">Secret Unlocked</span>Golden Drop Found (${foundDrops.length}/3)`;
+                document.body.appendChild(toast);
+                
+                gsap.to(toast, { opacity: 1, y: -20, duration: 0.5 });
+                gsap.to(toast, { opacity: 0, y: 0, duration: 0.5, delay: 4, onComplete: () => toast.remove() });
+
+                if(foundDrops.length >= 3) setTimeout(showRewardModal, 1500);
+            }
+        }
+
+        function showRewardModal() {
+            const modal = document.getElementById('reward-modal');
+            if(!modal) return;
+            const box = document.getElementById('reward-box');
+            modal.style.pointerEvents = 'auto';
+            modal.style.opacity = '1';
+            box.style.transform = 'scale(1)';
+        }
+
+        function closeReward() {
+            const modal = document.getElementById('reward-modal');
+            modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
+        }
+        
+        if(foundDrops.length >= 3 && !sessionStorage.getItem('rewardShown')) {
+            sessionStorage.setItem('rewardShown', 'true');
+            setTimeout(showRewardModal, 2000);
+        }
     </script>
 </body>
 </html>
+
