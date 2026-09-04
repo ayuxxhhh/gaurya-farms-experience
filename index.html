@@ -75,9 +75,7 @@
     <!-- Header Navigation -->
     <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="font-serif italic text-2xl tracking-wider font-bold text-alabaster hover:text-gold transition-colors">
-                Gaurya Farms.
-            </a>
+            <a href="index.html" class="flex-shrink-0 inline-block"><img src="assets/images/logo.png" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
             <div class="hidden md:flex space-x-8 items-center">
                 <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Home</a>
                 <a href="product.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Shop</a>
@@ -147,8 +145,7 @@
         <section class="min-h-screen py-24 px-6 flex items-center">
             <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="order-2 lg:order-1 img-mask h-[60vh] w-full reveal-img">
-                    <!-- Using one of the generated images for a tactile/moody feel -->
-                    <img src="assets/images/Gemini_Generated_Image_i1awfai1awfai1aw.png" alt="Tactile mood" class="parallax-img" data-speed="0.8">
+                    <img src="assets/images/product-jar-wood.jpg" alt="A2 Bilona Ghee" class="parallax-img object-cover w-full h-full" data-speed="0.8">
                 </div>
                 <div class="order-1 lg:order-2 space-y-6">
                     <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 03</p>
@@ -206,47 +203,75 @@
         </section>
 
         <!-- HOW ITS MADE: BILONA METHOD -->
-        <section class="py-32 px-6 bg-[#111111] text-center border-y border-white/5 overflow-hidden">
+        <section class="py-32 px-6 bg-[#111111] text-center text-alabaster overflow-hidden">
             <div class="max-w-7xl mx-auto">
                 <h2 class="font-serif text-4xl md:text-5xl leading-tight mb-20 chapter-heading">How It's Made: <span class="italic text-gold">The Bilona Method</span></h2>
                 
-                <div class="flex flex-col md:flex-row items-center justify-between relative max-w-5xl mx-auto chapter-body">
-                    <!-- Line connecting steps (Desktop) -->
-                    <div class="hidden md:block absolute top-1/2 left-10 right-10 h-[1px] bg-white/10 -z-10 transform -translate-y-1/2"></div>
+                <div class="flex flex-col md:flex-row items-center justify-between relative max-w-6xl mx-auto chapter-body space-y-12 md:space-y-0">
                     
-                    <div class="flex flex-col items-center mb-10 md:mb-0 bg-[#111111] px-4">
-                        <div class="w-24 h-24 rounded-full border border-gold/30 flex items-center justify-center mb-4 bg-[#1A1A1A]">
-                            <span class="text-gold font-serif text-2xl italic">1</span>
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center w-full md:w-1/5 px-2">
+                        <div class="h-32 flex items-center justify-center mb-6">
+                            <!-- Placeholder for A2 Milk Illustration. Add your real image to assets/images/step1-milk.png -->
+                            <img src="assets/images/step1-milk.png" alt="A2 Milk" class="max-h-full max-w-full object-contain drop-shadow-[0_0_15px_rgba(197,160,89,0.2)] hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23c5a059\' stroke-width=\'1\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M7 16V4a2 2 0 012-2h6a2 2 0 012 2v12m-9 0a2 2 0 00-2 2v2h12v-2a2 2 0 00-2-2m-9 0h9\'/></svg>'">
                         </div>
-                        <h3 class="font-medium text-sm tracking-widest uppercase">A2 Milk</h3>
+                        <h3 class="font-medium text-sm tracking-widest uppercase text-alabaster">A2 Milk</h3>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gold/30">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </div>
                     
-                    <div class="flex flex-col items-center mb-10 md:mb-0 bg-[#111111] px-4">
-                        <div class="w-24 h-24 rounded-full border border-gold/30 flex items-center justify-center mb-4 bg-[#1A1A1A]">
-                            <span class="text-gold font-serif text-2xl italic">2</span>
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center w-full md:w-1/5 px-2">
+                        <div class="h-32 flex items-center justify-center mb-6">
+                            <img src="assets/images/step2-curd.png" alt="Curd" class="max-h-full max-w-full object-contain drop-shadow-[0_0_15px_rgba(197,160,89,0.2)] hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23c5a059\' stroke-width=\'1\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M4 12c0 4.418 3.582 8 8 8s8-3.582 8-8M4 12c0-2.209 3.582-4 8-4s8 1.791 8 4M4 12h16\'/></svg>'">
                         </div>
-                        <h3 class="font-medium text-sm tracking-widest uppercase">Curd</h3>
+                        <h3 class="font-medium text-sm tracking-widest uppercase text-alabaster">Curd</h3>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gold/30">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </div>
                     
-                    <div class="flex flex-col items-center mb-10 md:mb-0 bg-[#111111] px-4">
-                        <div class="w-24 h-24 rounded-full border border-gold flex items-center justify-center mb-4 bg-gold/10 shadow-[0_0_20px_rgba(197,160,89,0.2)]">
-                            <span class="text-gold font-serif text-2xl italic">3</span>
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center w-full md:w-1/5 px-2">
+                        <div class="h-32 flex items-center justify-center mb-6 relative">
+                            <!-- Drop 1 Gamification Moved Here -->
+                            <div class="absolute -top-4 -right-4 cursor-crosshair drop-gamification" id="drop-1" onclick="collectDrop('drop-1', this)" title="Collect Drop">
+                                <svg class="w-6 h-6 text-gold animate-pulse hover:scale-125 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.5c-3.59 0-6.5-2.91-6.5-6.5 0-3.35 4.39-9.92 5.92-12.08.28-.39.87-.39 1.15 0 1.53 2.16 5.93 8.73 5.93 12.08 0 3.59-2.91 6.5-6.5 6.5z"/></svg>
+                            </div>
+                            <img id="interactive-churner" src="assets/images/step3-churned.png" alt="Churned" class="max-h-full max-w-full object-contain drop-shadow-[0_0_15px_rgba(197,160,89,0.2)] hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23c5a059\' stroke-width=\'1\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M12 3v18m-4-6h8m-6-4h4M8 17a4 4 0 008 0\'/></svg>'">
                         </div>
                         <h3 class="font-medium text-sm tracking-widest uppercase text-gold">Churned</h3>
                     </div>
-                    
-                    <div class="flex flex-col items-center mb-10 md:mb-0 bg-[#111111] px-4">
-                        <div class="w-24 h-24 rounded-full border border-gold/30 flex items-center justify-center mb-4 bg-[#1A1A1A]">
-                            <span class="text-gold font-serif text-2xl italic">4</span>
-                        </div>
-                        <h3 class="font-medium text-sm tracking-widest uppercase">Slow Heat</h3>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gold/30">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </div>
                     
-                    <div class="flex flex-col items-center bg-[#111111] px-4">
-                        <div class="w-24 h-24 rounded-full border border-gold/30 flex items-center justify-center mb-4 bg-[#1A1A1A]">
-                            <span class="text-gold font-serif text-2xl italic">5</span>
+                    <!-- Step 4 -->
+                    <div class="flex flex-col items-center w-full md:w-1/5 px-2">
+                        <div class="h-32 flex items-center justify-center mb-6">
+                            <img src="assets/images/step4-heat.png" alt="Slow Heat" class="max-h-full max-w-full object-contain drop-shadow-[0_0_15px_rgba(197,160,89,0.2)] hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23c5a059\' stroke-width=\'1\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M12 7c-2 0-3 2-3 4 0 2.5 3 4 3 4s3-1.5 3-4c0-2-1-4-3-4zm0 14c-4.418 0-8-3.582-8-8 0-4.418 3.582-8 8-8s8 3.582 8 8c0 4.418-3.582 8-8 8z\'/></svg>'">
                         </div>
-                        <h3 class="font-medium text-sm tracking-widest uppercase">Pure A2 Ghee</h3>
+                        <h3 class="font-medium text-sm tracking-widest uppercase text-alabaster">Slow Heat</h3>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gold/30">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </div>
+                    
+                    <!-- Step 5 -->
+                    <div class="flex flex-col items-center w-full md:w-1/5 px-2">
+                        <div class="h-32 flex items-center justify-center mb-6">
+                            <img src="assets/images/step5-ghee.png" alt="Pure A2 Ghee" class="max-h-full max-w-full object-contain drop-shadow-[0_0_15px_rgba(197,160,89,0.2)] hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23c5a059\' stroke-width=\'1\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><rect x=\'6\' y=\'8\' width=\'12\' height=\'14\' rx=\'2\'/><path d=\'M8 8V6a2 2 0 012-2h4a2 2 0 012 2v2M6 12h12\'/></svg>'">
+                        </div>
+                        <h3 class="font-medium text-sm tracking-widest uppercase text-alabaster">Pure A2 Ghee</h3>
                     </div>
                 </div>
             </div>
@@ -262,45 +287,45 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative chapter-body">
                     <!-- VS Badge -->
-                    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-[#1A1A1A] border border-gold rounded-full flex items-center justify-center z-10 hidden md:flex">
+                    <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-[#1A1A1A] border border-gold rounded-full flex items-center justify-center z-10 hidden md:flex hover:rotate-180 transition-transform duration-700 cursor-pointer">
                         <span class="text-gold font-serif italic font-bold">VS</span>
                     </div>
 
                     <!-- Left: Gaurya Farms (Green/Gold theme adapted to dark mode) -->
-                    <div class="bg-[#1c2419] p-10 md:p-14">
+                    <div class="bg-[#1c2419] p-10 md:p-14 group transition-colors duration-500 hover:bg-[#20291d]">
                         <p class="text-gold tracking-widest text-xs uppercase font-bold mb-4">Our Promise</p>
                         <h3 class="font-serif text-3xl mb-10 text-alabaster">Gaurya Farms Bilona Ghee<br><span class="text-sm font-sans font-light italic text-white/70 block mt-2">Pure, traditional & nothing artificial</span></h3>
                         
                         <ul class="space-y-8">
-                            <li class="flex items-start">
+                            <li class="flex items-start transform transition-transform group-hover:translate-x-2 duration-300">
                                 <svg class="w-6 h-6 text-gold mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 <div>
                                     <h4 class="font-bold text-alabaster">Made from A2 Gir Cow Milk</h4>
                                     <p class="text-sm text-white/60 font-light mt-1">Ethically cared for indigenous Gir cows</p>
                                 </div>
                             </li>
-                            <li class="flex items-start">
+                            <li class="flex items-start transform transition-transform group-hover:translate-x-2 duration-300 delay-75">
                                 <svg class="w-6 h-6 text-gold mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 <div>
                                     <h4 class="font-bold text-alabaster">Traditional Bilona Method</h4>
                                     <p class="text-sm text-white/60 font-light mt-1">Milk to curd to butter to slow-cooked ghee</p>
                                 </div>
                             </li>
-                            <li class="flex items-start">
+                            <li class="flex items-start transform transition-transform group-hover:translate-x-2 duration-300 delay-100">
                                 <svg class="w-6 h-6 text-gold mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 <div>
                                     <h4 class="font-bold text-alabaster">Slow Cooked on Low Flame</h4>
                                     <p class="text-sm text-white/60 font-light mt-1">Slow cooked for rich aroma, texture and traditional taste</p>
                                 </div>
                             </li>
-                            <li class="flex items-start">
+                            <li class="flex items-start transform transition-transform group-hover:translate-x-2 duration-300 delay-150">
                                 <svg class="w-6 h-6 text-gold mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 <div>
                                     <h4 class="font-bold text-alabaster">Handcrafted in Small Batches</h4>
                                     <p class="text-sm text-white/60 font-light mt-1">Care in every step, not mass produced</p>
                                 </div>
                             </li>
-                            <li class="flex items-start">
+                            <li class="flex items-start transform transition-transform group-hover:translate-x-2 duration-300 delay-200">
                                 <svg class="w-6 h-6 text-gold mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 <div>
                                     <h4 class="font-bold text-alabaster">No Preservatives or Additives</h4>
@@ -311,11 +336,11 @@
                     </div>
 
                     <!-- Right: Regular Ghee -->
-                    <div class="bg-[#222222] p-10 md:p-14">
+                    <div class="bg-[#222222] p-10 md:p-14 opacity-80 hover:opacity-100 transition-opacity duration-500">
                         <p class="text-muted tracking-widest text-xs uppercase font-bold mb-4">The Ordinary</p>
                         <h3 class="font-serif text-3xl mb-10 text-white/60">Regular Ghee<br><span class="text-sm font-sans font-light italic text-white/40 block mt-2">Mass-made, mixed sources</span></h3>
                         
-                        <ul class="space-y-8">
+                        <ul class="space-y-8 grayscale">
                             <li class="flex items-start">
                                 <svg class="w-6 h-6 text-red-900/50 mt-1 mr-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                                 <div>
@@ -359,8 +384,8 @@
 
         <!-- CTA YIELD -->
         <section class="min-h-screen flex items-center justify-center py-32 px-6 text-center relative overflow-hidden">
-            <div class="absolute inset-0 z-0 img-mask opacity-20">
-                <img src="assets/images/Gemini_Generated_Image_rdoecdrdoecdrdoe.png" class="parallax-img" alt="Texture" data-speed="0.3">
+            <div class="absolute inset-0 z-0 img-mask opacity-30">
+                <img src="assets/images/product-jar-marble.jpg" class="w-full h-full object-cover parallax-img" alt="Gaurya Farms A2 Ghee" data-speed="0.3">
             </div>
             <div class="relative z-10 max-w-3xl mx-auto space-y-8">
                 <div class="w-[1px] h-24 bg-gold mx-auto reveal-up origin-bottom"></div>
@@ -369,7 +394,7 @@
                     We make exactly one thing, because one thing done this way demands everything. 100% Pure A2 Bilona Ghee. A heritage superfood crafted for the modern pantry.
                 </p>
                 <div class="pt-8 chapter-body">
-                    <a href="https://gauryafarms.com" class="inline-block border border-gold text-gold hover:bg-gold hover:text-charcoal transition-colors duration-500 px-10 py-4 tracking-[0.2em] uppercase text-sm font-medium">
+                    <a href="product.html" class="inline-block border border-gold text-gold hover:bg-gold hover:text-charcoal transition-colors duration-500 px-10 py-4 tracking-[0.2em] uppercase text-sm font-medium">
                         Acquire Now
                     </a>
                 </div>
@@ -381,7 +406,7 @@
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                 <!-- Brand -->
                 <div class="md:col-span-1">
-                    <h3 class="font-serif italic text-2xl font-bold text-gold mb-6">Gaurya Farms.</h3>
+                    <img src="assets/images/logo.png" alt="Gaurya Farms" class="h-12 md:h-16 object-contain mb-6">
                     <p class="text-sm text-muted leading-relaxed font-light mb-6">
                         Ancestral preservation in a jar.<br>
                         100% pure A2 Gir cow bilona ghee, made ethically on our own farm.
@@ -400,8 +425,8 @@
                 <div>
                     <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Shop</h4>
                     <ul class="space-y-4 text-sm font-light text-muted">
-                        <li><a href="https://gauryafarms.com/collections/all" class="hover:text-gold transition-colors">All Products</a></li>
-                        <li><a href="https://gauryafarms.com/products/a2-bilona-gir-cow-ghee" class="hover:text-gold transition-colors">A2 Bilona Ghee</a></li>
+                        <li><a href="product.html" class="hover:text-gold transition-colors">All Products</a></li>
+                        <li><a href="product.html" class="hover:text-gold transition-colors">A2 Bilona Ghee</a></li>
                         <li><a href="https://gauryafarms.com/cart" class="hover:text-gold transition-colors">View Cart</a></li>
                     </ul>
                 </div>
@@ -444,11 +469,28 @@
         </footer>
     </main>
 
-    <style>
+    <!-- REWARD MODAL (Gamification) -->
+    <div id="reward-modal" class="fixed inset-0 z-[100] bg-[#111111]/90 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-1000">
+        <div class="bg-[#1A1A1A] border border-gold p-12 max-w-lg text-center shadow-[0_0_50px_rgba(197,160,89,0.2)] rounded-sm transform scale-95 transition-transform duration-1000" id="reward-box">
+            <svg class="w-16 h-16 text-gold mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.5c-3.59 0-6.5-2.91-6.5-6.5 0-3.35 4.39-9.92 5.92-12.08.28-.39.87-.39 1.15 0 1.53 2.16 5.93 8.73 5.93 12.08 0 3.59-2.91 6.5-6.5 6.5z"/></svg>
+            <h2 class="font-serif text-3xl mb-4 text-gold italic">The Artisan's Secret</h2>
+            <p class="text-muted font-light mb-8">You have found all 3 Golden Drops hidden across our farm. As a reward for your curiosity, enjoy 10% off your first batch.</p>
+            <div class="border border-gold/30 bg-[#151515] py-4 px-8 inline-block mb-8">
+                <span class="text-2xl font-mono text-alabaster tracking-widest select-all">ANCESTRAL10</span>
+            </div>
+            <br>
+            <button onclick="closeReward()" class="text-xs tracking-widest uppercase text-muted hover:text-gold transition-colors">Close</button>
+        </div>
+    </div>
+
+<style>
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-stopped { overflow: hidden; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .reveal-up { opacity: 0; transform: translateY(30px); }
         .reveal-img { opacity: 0; clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); transition: clip-path 1.2s cubic-bezier(0.5, 0, 0, 1), opacity 1.2s; }
         .reveal-img.is-revealed { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        .drop-gamification.found { display: none !important; }
     </style>
 
     <script>
@@ -456,27 +498,30 @@
         const cursorDot = document.getElementById('cursor-dot');
         const cursorOutline = document.getElementById('cursor-outline');
         window.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = `${e.clientX}px`;
-            cursorDot.style.top = `${e.clientY}px`;
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
             cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
         });
-
-        // Initialize Lenis
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
+        
+        // Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2, smooth: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
+        
+        // Gamified Scroll Interaction: The Bilona Churner
+        if(document.getElementById('interactive-churner')) {
+            gsap.to("#interactive-churner", {
+                rotation: 720,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#interactive-churner",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
+        }
 
-        // GSAP Setup
+        // Other GSAP Animations
         gsap.registerPlugin(ScrollTrigger);
         
         // Sync Lenis with GSAP
@@ -535,3 +580,4 @@
     </script>
 </body>
 </html>
+
