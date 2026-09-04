@@ -3,181 +3,128 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>The Bilona Method — Gaurya Farms</title>
-  <meta name="description" content="Experience the ancient Bilona method. Pure A2 Gir Cow Ghee, crafted with care, tradition, and honesty.">
+  <title>Gaurya Farms | Ancestral Preservation</title>
+  
+  <!-- Fonts matching the Brand Playbook -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="theme-dark">
+
+  <!-- ===================== CUSTOM CURSOR ===================== -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-outline" id="cursor-outline"></div>
 
   <!-- ===================== LOADING SCREEN ===================== -->
   <div class="loading-screen" id="loading-screen">
-    <img class="loading-screen__logo" src="assets/images/gaurya-farms-logo.png" alt="Gaurya Farms">
-    <p class="loading-screen__subtitle">The Bilona Method</p>
-    <div class="loading-screen__bar-track">
-      <div class="loading-screen__bar-fill" id="loading-bar"></div>
+    <div class="loading-screen__content">
+      <h2 class="loading-screen__title">Ancestral<br><i>Preservation.</i></h2>
+      <div class="loading-screen__bar-track">
+        <div class="loading-screen__bar-fill" id="loading-bar"></div>
+      </div>
+      <p class="loading-screen__percent text-gold" id="loading-percent">0%</p>
+      <button class="loading-screen__enter" id="enter-btn">Experience The Source</button>
     </div>
-    <p class="loading-screen__percent" id="loading-percent">0%</p>
-    <button class="loading-screen__enter" id="enter-btn">Enter Experience</button>
   </div>
 
   <!-- ===================== WEBGL CANVAS ===================== -->
   <canvas id="webgl-canvas"></canvas>
 
-  <!-- ===================== GOLD PARTICLES (CSS) ===================== -->
-  <div class="particles" id="particles" aria-hidden="true"></div>
-
   <!-- ===================== NAVIGATION ===================== -->
   <nav class="nav" id="nav">
-    <div class="nav__logo">
-      <img src="assets/images/gaurya-farms-logo.png" alt="Gaurya Farms" class="nav__logo-img">
-    </div>
+    <div class="nav__brand">Gaurya Farms.</div>
     <div class="nav__links">
-      <a href="https://gauryafarms.com" target="_blank" rel="noopener" class="nav__link">Shop</a>
-      <a href="https://gauryafarms.com" target="_blank" rel="noopener" class="nav__link nav__link--cta">Buy Ghee</a>
+      <a href="https://gauryafarms.com" target="_blank" rel="noopener" class="nav__link">Return to Shop</a>
     </div>
   </nav>
 
-  <!-- ===================== AUDIO TOGGLE ===================== -->
-  <button class="audio-toggle" id="audio-toggle" aria-label="Toggle sound">
-    <span class="audio-toggle__bars">
-      <span class="audio-toggle__bar"></span>
-      <span class="audio-toggle__bar"></span>
-      <span class="audio-toggle__bar"></span>
-      <span class="audio-toggle__bar"></span>
-    </span>
-    <span class="audio-toggle__label">Sound</span>
-  </button>
-
-  <!-- ===================== PROGRESS DOTS ===================== -->
-  <div class="progress-dots" id="progress-dots">
-    <button class="progress-dots__dot progress-dots__dot--active" data-section="0" aria-label="Chapter 1"></button>
-    <button class="progress-dots__dot" data-section="1" aria-label="Chapter 2"></button>
-    <button class="progress-dots__dot" data-section="2" aria-label="Chapter 3"></button>
-    <button class="progress-dots__dot" data-section="3" aria-label="Chapter 4"></button>
-    <button class="progress-dots__dot" data-section="4" aria-label="Chapter 5"></button>
-  </div>
-
   <!-- ===================== SCROLL INDICATOR ===================== -->
   <div class="scroll-indicator" id="scroll-indicator">
-    <span class="scroll-indicator__text">Scroll to explore</span>
+    <span class="scroll-indicator__text">Scroll</span>
     <span class="scroll-indicator__line"></span>
   </div>
 
-  <!-- ===================== SECTION 1: THE SOURCE ===================== -->
-  <section class="scroll-section" id="section-source">
-    <div class="scroll-section__content scroll-section__content--left">
-      <p class="section-step" data-anim="step">Chapter I</p>
-      <div class="section-heading-mask">
-        <h2 class="section-heading" data-anim="heading-reveal">Uncompromising<br>Purity.</h2>
-      </div>
-      <p class="section-subheading" data-anim="body-fade">
-        It begins at the source. Pure A2 milk from indigenous, grass-fed cows.
-        No industrial shortcuts — just a foundation of absolute quality.
-      </p>
-      <div class="section-line" data-anim="line-grow"></div>
-    </div>
-  </section>
+  <!-- ===================== NARRATIVE OVERLAY ===================== -->
+  <main class="content-overlay">
 
-  <!-- ===================== SECTION 2: THE CULTURING ===================== -->
-  <section class="scroll-section" id="section-culturing">
-    <div class="scroll-section__content scroll-section__content--right">
-      <p class="section-step" data-anim="step">Chapter II</p>
-      <div class="section-heading-mask">
-        <h2 class="section-heading" data-anim="heading-reveal">Time is an<br>Ingredient.</h2>
+    <section class="scroll-section" id="section-source">
+      <div class="scroll-section__content">
+        <p class="section-step" data-anim="step">Phase 01</p>
+        <div class="section-heading-mask">
+          <h2 class="section-heading" data-anim="heading-reveal">Uncompromising<br><i>Purity.</i></h2>
+        </div>
+        <div class="section-divider" data-anim="line-grow"></div>
+        <p class="section-subheading" data-anim="body-fade">
+          It begins at the source. Pure A2 milk from indigenous, grass-fed cows.
+          No industrial shortcuts — just a foundation of absolute quality.
+        </p>
       </div>
-      <p class="section-subheading" data-anim="body-fade">
-        We do not rush nature. The milk is slowly cultured into rich,
-        earthen dahi overnight. Patience transforms the raw into the profound.
-      </p>
-      <div class="section-line" data-anim="line-grow"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===================== SECTION 3: THE CHURN ===================== -->
-  <section class="scroll-section" id="section-churn">
-    <div class="scroll-section__content scroll-section__content--left">
-      <p class="section-step" data-anim="step">Chapter III</p>
-      <div class="section-heading-mask">
-        <h2 class="section-heading" data-anim="heading-reveal">The Rhythm of<br>Tradition.</h2>
+    <section class="scroll-section" id="section-culturing">
+      <div class="scroll-section__content right-align">
+        <p class="section-step" data-anim="step">Phase 02</p>
+        <div class="section-heading-mask">
+          <h2 class="section-heading" data-anim="heading-reveal">Time is an<br><i>Ingredient.</i></h2>
+        </div>
+        <div class="section-divider" data-anim="line-grow"></div>
+        <p class="section-subheading" data-anim="body-fade">
+          We do not rush nature. The milk is slowly cultured into rich,
+          earthen dahi overnight. Patience transforms the raw into the profound.
+        </p>
       </div>
-      <p class="section-subheading" data-anim="body-fade">
-        Bidirectional. Methodical. The traditional wooden Bilona churns
-        the curd before dawn, extracting the pristine Makhan while the rest falls away.
-      </p>
-      <div class="section-line" data-anim="line-grow"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===================== SECTION 4: THE CLARIFICATION ===================== -->
-  <section class="scroll-section" id="section-clarification">
-    <div class="scroll-section__content scroll-section__content--right">
-      <p class="section-step" data-anim="step">Chapter IV</p>
-      <div class="section-heading-mask">
-        <h2 class="section-heading" data-anim="heading-reveal">Forged in<br>Warmth.</h2>
+    <section class="scroll-section" id="section-churn">
+      <div class="scroll-section__content">
+        <p class="section-step" data-anim="step">Phase 03</p>
+        <div class="section-heading-mask">
+          <h2 class="section-heading" data-anim="heading-reveal">The Rhythm of<br><i>Tradition.</i></h2>
+        </div>
+        <div class="section-divider" data-anim="line-grow"></div>
+        <p class="section-subheading" data-anim="body-fade">
+          Bidirectional. Methodical. The traditional wooden Bilona churns
+          the curd before dawn, extracting the pristine Makhan while the rest falls away.
+        </p>
       </div>
-      <p class="section-subheading" data-anim="body-fade">
-        Slow-simmered over a gentle, open flame. As the heat rises,
-        the liquid clarifies, revealing a golden, nutrient-dense nectar
-        with an unmistakable aroma.
-      </p>
-      <div class="section-line" data-anim="line-grow"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===================== SECTION 5: THE YIELD ===================== -->
-  <section class="scroll-section scroll-section--yield" id="section-yield">
-    <div class="cta-block" id="cta-block">
-      <div class="section-heading-mask">
-        <h2 class="cta-block__title" data-anim="heading-reveal">Liquid Gold.</h2>
+    <section class="scroll-section" id="section-clarification">
+      <div class="scroll-section__content right-align">
+        <p class="section-step" data-anim="step">Phase 04</p>
+        <div class="section-heading-mask">
+          <h2 class="section-heading" data-anim="heading-reveal">Forged in<br><i>Warmth.</i></h2>
+        </div>
+        <div class="section-divider" data-anim="line-grow"></div>
+        <p class="section-subheading" data-anim="body-fade">
+          Slow-simmered over a gentle, open flame. As the heat rises,
+          the liquid clarifies, revealing a golden, nutrient-dense nectar
+          with an unmistakable aroma.
+        </p>
       </div>
-      <p class="cta-block__body" data-anim="body-fade">
-        100% Pure A2 Bilona Ghee.<br>
-        A heritage superfood crafted for the modern pantry.
-      </p>
-      <div class="cta-block__action" data-anim="cta-fade">
-        <p class="cta-block__tagline">Experience Gaurya.</p>
-        <div class="cta-block__price-row">
-          <span class="cta-block__price">₹2,499</span>
-          <span class="cta-block__price-mrp">₹4,500</span>
+    </section>
+
+    <section class="scroll-section section-yield" id="section-yield">
+      <div class="cta-block" id="cta-block">
+        <div class="section-heading-mask">
+          <h2 class="cta-block__title" data-anim="heading-reveal">The Single SKU<br><i>Focus.</i></h2>
         </div>
-        <a class="cta-block__button" href="https://gauryafarms.com" target="_blank" rel="noopener noreferrer">
-          Add to Cart
-        </a>
-      </div>
-      <!-- Trust badges -->
-      <div class="trust-badges" data-anim="badges-fade">
-        <div class="trust-badge">
-          <span class="trust-badge__icon">🐄</span>
-          <span class="trust-badge__text">A2 Gir Cow</span>
-        </div>
-        <div class="trust-badge">
-          <span class="trust-badge__icon">🏺</span>
-          <span class="trust-badge__text">Bilona Churned</span>
-        </div>
-        <div class="trust-badge">
-          <span class="trust-badge__icon">🔬</span>
-          <span class="trust-badge__text">Lab Tested</span>
-        </div>
-        <div class="trust-badge">
-          <span class="trust-badge__icon">🚚</span>
-          <span class="trust-badge__text">Free Shipping</span>
+        <p class="cta-block__body" data-anim="body-fade">
+          We make exactly one thing, because one thing done this way demands everything. 
+          A heritage superfood crafted for the modern pantry.
+        </p>
+        <div class="cta-block__action" data-anim="cta-fade">
+          <a class="cta-block__button" href="https://gauryafarms.com" target="_blank">
+            Acquire Now
+          </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="footer">
-    <div class="footer__inner">
-      <p class="footer__brand">Gaurya Farms · Chittorgarh, Rajasthan</p>
-      <p class="footer__copy">Pure by Tradition · FSSAI Licensed · ISO 22000 Certified</p>
-      <div class="footer__links">
-        <a href="https://www.instagram.com/gauryafarms/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.youtube.com/@gauryafarms" target="_blank" rel="noopener">YouTube</a>
-        <a href="mailto:info@gauryafarms.com">Contact</a>
-      </div>
-    </div>
-  </footer>
+  </main>
 
   <script type="module" src="main.js"></script>
 </body>
