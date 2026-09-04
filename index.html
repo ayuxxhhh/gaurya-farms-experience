@@ -1,131 +1,354 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Gaurya Farms | Ancestral Preservation</title>
-  
-  <!-- Fonts matching the Brand Playbook -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaurya Farms | The Ancestral Method</title>
+    <meta name="description" content="Experience the raw documentary blueprint for Gaurya Farms. Pure A2 Gir Cow Ghee.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        charcoal: '#1A1A1A',
+                        alabaster: '#FAF9F6',
+                        gold: '#C5A059',
+                        muted: '#8C8C8C',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { background-color: #1A1A1A; color: #FAF9F6; cursor: none; overflow-x: hidden; }
+        ::selection { background-color: #C5A059; color: white; }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+            border-radius: 50%; z-index: 9999; pointer-events: none;
+        }
+        .cursor-dot { width: 6px; height: 6px; background-color: #C5A059; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(197, 160, 89, 0.4); transition: width 0.2s, height 0.2s; }
+        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(197, 160, 89, 0.1); border-color: transparent; }
+
+        /* Lenis */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+
+        /* Image Masks & Parallax */
+        .img-mask { overflow: hidden; position: relative; }
+        .parallax-img { width: 100%; height: 130%; object-fit: cover; position: absolute; top: -15%; }
+        
+        /* Typography Reveals */
+        .reveal-mask { overflow: hidden; display: inline-block; }
+        .reveal-text { display: inline-block; transform: translateY(110%); }
+    </style>
 </head>
-<body class="theme-dark">
+<body class="font-sans antialiased text-alabaster">
 
-  <!-- ===================== CUSTOM CURSOR ===================== -->
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-outline" id="cursor-outline"></div>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
 
-  <!-- ===================== LOADING SCREEN ===================== -->
-  <div class="loading-screen" id="loading-screen">
-    <div class="loading-screen__content">
-      <h2 class="loading-screen__title">Ancestral<br><i>Preservation.</i></h2>
-      <div class="loading-screen__bar-track">
-        <div class="loading-screen__bar-fill" id="loading-bar"></div>
-      </div>
-      <p class="loading-screen__percent text-gold" id="loading-percent">0%</p>
-      <button class="loading-screen__enter" id="enter-btn">Experience The Source</button>
-    </div>
-  </div>
-
-  <!-- ===================== WEBGL CANVAS ===================== -->
-  <canvas id="webgl-canvas"></canvas>
-
-  <!-- ===================== NAVIGATION ===================== -->
-  <nav class="nav" id="nav">
-    <div class="nav__brand">Gaurya Farms.</div>
-    <div class="nav__links">
-      <a href="https://gauryafarms.com" target="_blank" rel="noopener" class="nav__link">Return to Shop</a>
-    </div>
-  </nav>
-
-  <!-- ===================== SCROLL INDICATOR ===================== -->
-  <div class="scroll-indicator" id="scroll-indicator">
-    <span class="scroll-indicator__text">Scroll</span>
-    <span class="scroll-indicator__line"></span>
-  </div>
-
-  <!-- ===================== NARRATIVE OVERLAY ===================== -->
-  <main class="content-overlay">
-
-    <section class="scroll-section" id="section-source">
-      <div class="scroll-section__content">
-        <p class="section-step" data-anim="step">Phase 01</p>
-        <div class="section-heading-mask">
-          <h2 class="section-heading" data-anim="heading-reveal">Uncompromising<br><i>Purity.</i></h2>
+    <!-- Header Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="font-serif italic text-2xl tracking-wider font-bold text-alabaster hover:text-gold transition-colors">
+                Gaurya Farms.
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Home</a>
+                <a href="product.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Shop</a>
+                <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Our Story</a>
+                <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Contact</a>
+                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-alabaster hover:text-gold">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
         </div>
-        <div class="section-divider" data-anim="line-grow"></div>
-        <p class="section-subheading" data-anim="body-fade">
-          It begins at the source. Pure A2 milk from indigenous, grass-fed cows.
-          No industrial shortcuts — just a foundation of absolute quality.
-        </p>
-      </div>
-    </section>
+    </header>
 
-    <section class="scroll-section" id="section-culturing">
-      <div class="scroll-section__content right-align">
-        <p class="section-step" data-anim="step">Phase 02</p>
-        <div class="section-heading-mask">
-          <h2 class="section-heading" data-anim="heading-reveal">Time is an<br><i>Ingredient.</i></h2>
-        </div>
-        <div class="section-divider" data-anim="line-grow"></div>
-        <p class="section-subheading" data-anim="body-fade">
-          We do not rush nature. The milk is slowly cultured into rich,
-          earthen dahi overnight. Patience transforms the raw into the profound.
-        </p>
-      </div>
-    </section>
+    <main>
+        <!-- HERO -->
+        <section class="h-screen flex items-center justify-center px-6 relative">
+            <div class="absolute inset-0 z-0 img-mask opacity-40">
+                <img src="assets/images/pouring-oil.jpg" class="parallax-img" alt="Ghee pouring" data-speed="0.5">
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-charcoal"></div>
+            </div>
+            
+            <div class="relative z-10 text-center">
+                <p class="text-gold tracking-[0.3em] uppercase text-xs mb-6 font-medium reveal-up">The Ancestral Process</p>
+                <h1 class="font-serif text-5xl md:text-7xl leading-tight mb-8">
+                    <span class="reveal-mask"><span class="reveal-text">Uncompromising</span></span><br>
+                    <span class="reveal-mask"><span class="reveal-text italic text-gold">Purity.</span></span>
+                </h1>
+                <div class="w-[1px] h-24 bg-gold mx-auto reveal-up origin-top"></div>
+            </div>
+        </section>
 
-    <section class="scroll-section" id="section-churn">
-      <div class="scroll-section__content">
-        <p class="section-step" data-anim="step">Phase 03</p>
-        <div class="section-heading-mask">
-          <h2 class="section-heading" data-anim="heading-reveal">The Rhythm of<br><i>Tradition.</i></h2>
-        </div>
-        <div class="section-divider" data-anim="line-grow"></div>
-        <p class="section-subheading" data-anim="body-fade">
-          Bidirectional. Methodical. The traditional wooden Bilona churns
-          the curd before dawn, extracting the pristine Makhan while the rest falls away.
-        </p>
-      </div>
-    </section>
+        <!-- CHAPTER I: THE SOURCE -->
+        <section class="min-h-screen py-24 px-6 flex items-center">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 img-mask h-[60vh] w-full reveal-img">
+                    <img src="assets/images/cow-tree.jpg" alt="Indigenous Gir Cow" class="parallax-img" data-speed="0.8">
+                </div>
+                <div class="order-1 lg:order-2 space-y-6">
+                    <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 01</p>
+                    <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">The Source.</h2>
+                    <p class="text-muted font-light leading-relaxed max-w-md text-lg chapter-body">
+                        It begins at the source. Pure A2 milk from indigenous, grass-fed Gir cows. No industrial shortcuts, no crowded feedlots — just a foundation of absolute, unyielding quality on our own farm.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-    <section class="scroll-section" id="section-clarification">
-      <div class="scroll-section__content right-align">
-        <p class="section-step" data-anim="step">Phase 04</p>
-        <div class="section-heading-mask">
-          <h2 class="section-heading" data-anim="heading-reveal">Forged in<br><i>Warmth.</i></h2>
-        </div>
-        <div class="section-divider" data-anim="line-grow"></div>
-        <p class="section-subheading" data-anim="body-fade">
-          Slow-simmered over a gentle, open flame. As the heat rises,
-          the liquid clarifies, revealing a golden, nutrient-dense nectar
-          with an unmistakable aroma.
-        </p>
-      </div>
-    </section>
+        <!-- CHAPTER II: THE CULTURING -->
+        <section class="min-h-screen py-24 px-6 flex items-center bg-[#151515]">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 02</p>
+                    <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">Time is an<br><span class="italic text-gold">Ingredient.</span></h2>
+                    <p class="text-muted font-light leading-relaxed max-w-md text-lg chapter-body">
+                        We do not rush nature. The milk is slowly cultured into rich, earthen dahi overnight in traditional clay pots. Patience transforms the raw into the profound.
+                    </p>
+                </div>
+                <div class="img-mask h-[60vh] w-full reveal-img">
+                    <img src="assets/images/cow-calf.jpg" alt="Farm details" class="parallax-img" data-speed="0.8">
+                </div>
+            </div>
+        </section>
 
-    <section class="scroll-section section-yield" id="section-yield">
-      <div class="cta-block" id="cta-block">
-        <div class="section-heading-mask">
-          <h2 class="cta-block__title" data-anim="heading-reveal">The Single SKU<br><i>Focus.</i></h2>
-        </div>
-        <p class="cta-block__body" data-anim="body-fade">
-          We make exactly one thing, because one thing done this way demands everything. 
-          A heritage superfood crafted for the modern pantry.
-        </p>
-        <div class="cta-block__action" data-anim="cta-fade">
-          <a class="cta-block__button" href="https://gauryafarms.com" target="_blank">
-            Acquire Now
-          </a>
-        </div>
-      </div>
-    </section>
+        <!-- CHAPTER III: THE CHURN -->
+        <section class="min-h-screen py-24 px-6 flex items-center">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 img-mask h-[60vh] w-full reveal-img">
+                    <!-- Using one of the generated images for a tactile/moody feel -->
+                    <img src="assets/images/Gemini_Generated_Image_i1awfai1awfai1aw.png" alt="Tactile mood" class="parallax-img" data-speed="0.8">
+                </div>
+                <div class="order-1 lg:order-2 space-y-6">
+                    <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 03</p>
+                    <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">The Rhythm of<br><span class="italic text-gold">Tradition.</span></h2>
+                    <p class="text-muted font-light leading-relaxed max-w-md text-lg chapter-body">
+                        Bidirectional. Methodical. The traditional wooden Bilona churns the curd before dawn, extracting the pristine Makhan while the buttermilk falls away. Hand-churned, just as it was centuries ago.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-  </main>
+        <!-- CHAPTER IV: THE CLARIFICATION -->
+        <section class="min-h-screen py-24 px-6 flex items-center bg-[#151515]">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold chapter-step">Phase 04</p>
+                    <h2 class="font-serif text-4xl md:text-5xl leading-tight chapter-heading">Forged in<br><span class="italic text-gold">Warmth.</span></h2>
+                    <p class="text-muted font-light leading-relaxed max-w-md text-lg chapter-body">
+                        Slow-simmered over a gentle, open flame. As the heat rises, the liquid clarifies, revealing a golden, nutrient-dense nectar with an unmistakable, roasted aroma.
+                    </p>
+                </div>
+                <div class="img-mask h-[60vh] w-full reveal-img">
+                    <img src="assets/images/oil-bubbles.jpg" alt="Golden ghee" class="parallax-img" data-speed="0.8">
+                </div>
+            </div>
+        </section>
 
-  <script type="module" src="main.js"></script>
+        <!-- CTA YIELD -->
+        <section class="min-h-screen flex items-center justify-center py-32 px-6 text-center relative overflow-hidden">
+            <div class="absolute inset-0 z-0 img-mask opacity-20">
+                <img src="assets/images/Gemini_Generated_Image_rdoecdrdoecdrdoe.png" class="parallax-img" alt="Texture" data-speed="0.3">
+            </div>
+            <div class="relative z-10 max-w-3xl mx-auto space-y-8">
+                <div class="w-[1px] h-24 bg-gold mx-auto reveal-up origin-bottom"></div>
+                <h2 class="font-serif text-5xl md:text-7xl leading-tight chapter-heading">The Single SKU<br><span class="italic text-gold">Focus.</span></h2>
+                <p class="text-muted font-light text-xl leading-relaxed max-w-2xl mx-auto chapter-body">
+                    We make exactly one thing, because one thing done this way demands everything. 100% Pure A2 Bilona Ghee. A heritage superfood crafted for the modern pantry.
+                </p>
+                <div class="pt-8 chapter-body">
+                    <a href="https://gauryafarms.com" class="inline-block border border-gold text-gold hover:bg-gold hover:text-charcoal transition-colors duration-500 px-10 py-4 tracking-[0.2em] uppercase text-sm font-medium">
+                        Acquire Now
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="md:col-span-1">
+                    <h3 class="font-serif italic text-2xl font-bold text-gold mb-6">Gaurya Farms.</h3>
+                    <p class="text-sm text-muted leading-relaxed font-light mb-6">
+                        Ancestral preservation in a jar.<br>
+                        100% pure A2 Gir cow bilona ghee, made ethically on our own farm.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/gauryafarms/" target="_blank" class="text-muted hover:text-gold transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                        <a href="#" class="text-muted hover:text-gold transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Shop -->
+                <div>
+                    <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Shop</h4>
+                    <ul class="space-y-4 text-sm font-light text-muted">
+                        <li><a href="https://gauryafarms.com/collections/all" class="hover:text-gold transition-colors">All Products</a></li>
+                        <li><a href="https://gauryafarms.com/products/a2-bilona-gir-cow-ghee" class="hover:text-gold transition-colors">A2 Bilona Ghee</a></li>
+                        <li><a href="https://gauryafarms.com/cart" class="hover:text-gold transition-colors">View Cart</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Support</h4>
+                    <ul class="space-y-4 text-sm font-light text-muted">
+                        <li><a href="https://gauryafarms.com/pages/contact" class="hover:text-gold transition-colors">Contact Us</a></li>
+                        <li><a href="https://gauryafarms.com/policies/shipping-policy" class="hover:text-gold transition-colors">Shipping Policy</a></li>
+                        <li><a href="https://gauryafarms.com/policies/refund-policy" class="hover:text-gold transition-colors">Refund Policy</a></li>
+                        <li><a href="https://gauryafarms.com/policies/terms-of-service" class="hover:text-gold transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Contact</h4>
+                    <ul class="space-y-4 text-sm font-light text-muted">
+                        <li>
+                            <span class="block text-alabaster mb-1">Farm Address</span>
+                            Jalday Vibhag Ke Store Pass,<br>Tejaji Ka Chouk Road, Pratap Nagar,<br>Chittorgarh, Rajasthan 312001
+                        </li>
+                        <li class="pt-2">
+                            <span class="block text-alabaster mb-1">Phone</span>
+                            <a href="tel:+918503830383" class="hover:text-gold transition-colors">+91-8503830383</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light text-muted">
+                <p>&copy; 2024 Gaurya Farms. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="https://gauryafarms.com/policies/privacy-policy" class="hover:text-gold transition-colors">Privacy Policy</a>
+                    <a href="https://gauryafarms.com/policies/terms-of-service" class="hover:text-gold transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <style>
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .reveal-up { opacity: 0; transform: translateY(30px); }
+        .reveal-img { opacity: 0; clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); transition: clip-path 1.2s cubic-bezier(0.5, 0, 0, 1), opacity 1.2s; }
+        .reveal-img.is-revealed { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+    </style>
+
+    <script>
+        // Custom Cursor
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
+        });
+
+        // Initialize Lenis
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // GSAP Setup
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Sync Lenis with GSAP
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => { lenis.raf(time * 1000) });
+        gsap.ticker.lagSmoothing(0);
+
+        // Hero Animation
+        const heroTl = gsap.timeline();
+        heroTl.to('.reveal-text', { y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.2, delay: 0.5 })
+              .to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.2 }, "-=0.8");
+
+        // Scroll Animations for Chapters
+        const sections = document.querySelectorAll('section');
+        
+        sections.forEach(section => {
+            const heading = section.querySelector('.chapter-heading');
+            const step = section.querySelector('.chapter-step');
+            const body = section.querySelectorAll('.chapter-body');
+            const imgContainer = section.querySelector('.reveal-img');
+            const parallaxImg = section.querySelector('.parallax-img');
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 75%",
+                }
+            });
+
+            if (imgContainer) {
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: "top 75%",
+                    onEnter: () => imgContainer.classList.add('is-revealed')
+                });
+            }
+
+            if (step) tl.fromTo(step, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0);
+            if (heading) tl.fromTo(heading, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, 0.2);
+            if (body.length > 0) tl.fromTo(body, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1 }, 0.4);
+
+            // Image Parallax Effect
+            if (parallaxImg) {
+                gsap.to(parallaxImg, {
+                    yPercent: 15,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
