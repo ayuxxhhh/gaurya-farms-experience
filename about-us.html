@@ -22,38 +22,46 @@
         }
     </script>
     
-    <style>
-        body { background-color: #1A1A1A; color: #FAF9F6; cursor: none; overflow-x: hidden; }
+        <style>
+        :root {
+            --bg-primary: #FAF9F6;
+            --bg-secondary: #f0ebe1;
+            --bg-tertiary: #ffffff;
+            --bg-subtle: #ffffff;
+            --text-primary: #1A1A1A;
+            --text-secondary: #4a4a4a;
+            --border-color: rgba(0,0,0,0.05);
+        }
+        body { background-color: var(--bg-primary); color: var(--text-primary); overflow-x: hidden; }
         ::selection { background-color: #C5A059; color: white; }
-        .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
-        .cursor-dot { width: 6px; height: 6px; background-color: #C5A059; }
-        .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(197, 160, 89, 0.4); transition: width 0.2s, height 0.2s; }
-        a:hover ~ .cursor-outline, button:hover ~ .cursor-outline { width: 60px; height: 60px; background-color: rgba(197, 160, 89, 0.1); border-color: transparent; }
+        .text-themed { color: var(--text-primary); }
+        .text-themed-muted { color: var(--text-secondary); }
+        
+        /* Lenis CSS */
         html.lenis, html.lenis body { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto !important; }
         .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
         .lenis.lenis-stopped { overflow: hidden; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .reveal-up { opacity: 0; transform: translateY(30px); }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
     </style>
 </head>
-<body class="font-sans antialiased text-alabaster">
+<body class="font-sans antialiased text-[#111]">
 
     <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursor-dot"></div>
     <div class="cursor-outline" id="cursor-outline"></div>
 
     <!-- Header Navigation -->
-    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-white/5">
+    <header class="fixed w-full top-0 z-50 bg-[#1A1A1A]/80 backdrop-blur-md border-b border-black/5">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex-shrink-0 inline-block"><img src="assets/images/logo.png" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
+            <a href="index.html" class="flex-shrink-0 inline-block"><img src="./assets/images/Gaurya Farms Logo (New).svg" alt="Gaurya Farms" class="h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"></a>
             <div class="hidden md:flex space-x-8 items-center">
-                <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Home</a>
-                <a href="https://gauryafarms.com/collections/all" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Shop</a>
+                <a href="index.html" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors">Home</a>
+                <a href="https://gauryafarms.com/collections/all" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors">Shop</a>
                 <a href="about-us.html" class="text-xs tracking-[0.2em] uppercase text-gold transition-colors">Our Story</a>
-                <a href="lab-report.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Lab Report</a>
-                <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors">Contact</a>
-                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-alabaster hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
+                <a href="lab-report.html" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors">Lab Report</a>
+                <a href="contact.html" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors">Contact</a>
+                <a href="https://gauryafarms.com/cart" class="text-xs tracking-[0.2em] uppercase text-[#111] hover:text-gold transition-colors border border-white/20 px-4 py-2 hover:border-gold">Cart (0)</a>
             </div>
         </div>
     </header>
@@ -78,9 +86,9 @@
 
         <!-- Section 2: The Philosophy Grid -->
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 mb-32 items-center reveal-up">
-            <div class="bg-[#151515] p-12 border border-white/5 h-full flex flex-col justify-center">
+            <div class="bg-[var(--bg-subtle)] p-12 border border-black/5 h-full flex flex-col justify-center">
                 <p class="text-gold tracking-[0.2em] uppercase text-xs font-bold mb-4">The Philosophy</p>
-                <h2 class="font-serif text-3xl md:text-4xl leading-tight mb-6 text-alabaster">More than a business,<br><span class="italic text-white/50">it's a devotion.</span></h2>
+                <h2 class="font-serif text-3xl md:text-4xl leading-tight mb-6 text-[#111]">More than a business,<br><span class="italic text-black/50">it's a devotion.</span></h2>
                 <div class="space-y-4 text-muted font-light">
                     <p>In an era of mass production and hyper-efficiency, we chose the path of resistance. True A2 Bilona Ghee cannot be rushed in a factory. It requires the gentle rhythm of hand-churning before dawn, the exact temperature of a slow-burning wood fire, and the silent, intuitive knowledge passed down through our ancestors.</p>
                     <p>We restrict our batches deliberately. By focusing exclusively on this single craft, we ensure that every jar that leaves our farm carries the energetic signature of pure, unadulterated devotion.</p>
@@ -97,7 +105,7 @@
                 <img src="assets/images/cow-calf.jpg" alt="Gir Cow and Calf" class="w-full h-full object-cover parallax-img" data-speed="0.8">
             </div>
             <div class="order-1 md:order-2 space-y-8 text-left">
-                <h2 class="font-serif text-4xl leading-tight text-alabaster">Revering the <br><span class="italic text-gold">Gir Cow.</span></h2>
+                <h2 class="font-serif text-4xl leading-tight text-[#111]">Revering the <br><span class="italic text-gold">Gir Cow.</span></h2>
                 <div class="space-y-6 text-muted font-light text-lg leading-relaxed">
                     <p>
                         Our indigenous Gir cows are not livestock; they are the heart of our community. They graze freely on organic pastures under the Rajasthani sun. We follow the ancient 'Dohan' system—where the calf always receives its share of milk first, and only the surplus is taken for churning.
@@ -109,77 +117,102 @@
             </div>
         </div>
         
-        <!-- Section 4: A Note From Our Founders (Updated with farmer-selfie.jpg) -->
-        <div class="max-w-5xl mx-auto border-t border-white/5 pt-24 mt-24 mb-16 text-center reveal-up">
-            <svg class="w-10 h-10 text-gold/40 mx-auto mb-10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-            <div class="space-y-8 text-xl md:text-2xl font-serif leading-relaxed text-alabaster max-w-4xl mx-auto">
-                <p>
-                    <span class="italic">"When did we all agree that 'faster' was better when it comes to the food we feed our families?</span>
-                </p>
-                <p class="text-white/80">
-                    <span class="italic">Somewhere along the line, India was convinced that a factory-processed tub from a supermarket shelf was the same as what our Dadis and Nanis made with their hands. But deep down, every time you smell real, golden, slow-churned ghee, you know the difference.</span>
-                </p>
-                <p class="text-white/80">
-                    <span class="italic">We didn't start Gaurya Farms to give you a sustainability lecture or a wellness sermon. We started it as friends who went back to the village, unlearned the shortcuts, understood the science, and brought the original stuff back.</span>
-                </p>
-                <p>
-                    <span class="italic">You know better, and now you can do better. Here’s to bringing the soul back to your kitchen."</span>
-                </p>
-            </div>
-            <div class="mt-16 flex flex-col items-center">
-                <div class="w-20 h-20 rounded-full overflow-hidden mb-6 border-2 border-gold/30">
-                    <img src="assets/images/farmer-selfie.jpg" alt="Gaurya Farms Founders" class="w-full h-full object-cover">
+                <!-- Section 4: The Founder's Vision -->
+        <div class="max-w-7xl mx-auto border-t border-black/5 pt-20 mt-12 mb-16 reveal-up">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+                
+                <!-- Image Column -->
+                <div class="md:col-span-5 img-mask h-[80vh] w-full">
+                    <img src="assets/images/nitika-devpura.jpg" alt="Nitika Devpura, Founder" class="w-full h-full object-cover parallax-img" data-speed="0.9">
                 </div>
-                <div class="w-12 h-[1px] bg-gold mx-auto mb-4"></div>
-                <p class="text-xs tracking-[0.3em] uppercase text-gold font-bold">The Founders</p>
-                <p class="text-sm text-muted font-light mt-2">Gaurya Farms</p>
+
+                <!-- Text Column -->
+                <div class="md:col-span-7 space-y-10 pl-0 md:pl-10">
+                    <svg class="w-12 h-12 text-gold/40 mb-10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                    
+                    <div class="space-y-8 text-2xl md:text-3xl font-serif leading-snug text-[#111]">
+                        <p class="italic">"When did we all agree that 'faster' was better when it comes to the food we feed our families?"</p>
+                        <p class="text-black/80 text-xl md:text-2xl italic leading-relaxed">
+                            "Somewhere along the line, India was convinced that a factory-processed tub from a supermarket shelf was the same as what our Dadis and Nanis made with their hands. But deep down, every time you smell real, golden, slow-churned ghee, you know the difference."
+                        </p>
+                        <p class="text-black/80 text-xl md:text-2xl italic leading-relaxed">
+                            "We didn't start Gaurya Farms to give you a sustainability lecture or a wellness sermon. We started it as friends who went back to the village, unlearned the shortcuts, understood the science, and brought the original stuff back."
+                        </p>
+                        <p class="text-xl md:text-2xl italic text-gold">
+                            "You know better, and now you can do better. Here's to bringing the soul back to your kitchen."
+                        </p>
+                    </div>
+
+                    <div class="pt-8">
+                        <div class="w-16 h-[1px] bg-gold mb-6"></div>
+                        <p class="font-serif text-4xl text-[#111] tracking-wide">Nitika Devpura</p>
+                        <p class="text-sm tracking-[0.3em] uppercase text-gold font-bold mt-3">Founder, Gaurya Farms</p>
+                    </div>
+                </div>
             </div>
         </div>
         
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-[#111111] border-t border-white/5 pt-20 pb-10 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div class="md:col-span-1">
-                <img src="assets/images/logo.png" alt="Gaurya Farms" class="h-12 md:h-16 object-contain mb-6">
-                <p class="text-sm text-muted leading-relaxed font-light mb-6">Ancestral preservation in a jar.<br>100% pure A2 Gir cow bilona ghee, made ethically on our own farm.</p>
+        <!-- FOOTER -->
+    <footer class="bg-[var(--bg-subtle)] pt-24 pb-12 border-t border-[var(--border-color)] px-6 text-center mt-24">
+        <div class="max-w-4xl mx-auto flex flex-col items-center">
+            <img src="assets/images/Gaurya Farms Logo (New).svg" class="w-24 opacity-60 mb-8" alt="Gaurya Farms">
+            <div class="flex flex-wrap justify-center gap-8 mb-12 text-xs tracking-[0.2em] font-medium uppercase text-themed-muted">
+                <a href="product.html" class="hover:text-gold transition-colors">Shop</a>
+                <a href="about-us.html" class="hover:text-gold transition-colors">Story</a>
+                <a href="lab-report.html" class="hover:text-gold transition-colors">Lab Report</a>
+                <a href="contact.html" class="hover:text-gold transition-colors">Contact</a>
             </div>
-            <div>
-                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Shop</h4>
-                <ul class="space-y-4 text-sm font-light text-muted">
-                    <li><a href="https://gauryafarms.com/collections/all" class="hover:text-gold transition-colors">All Products</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Support</h4>
-                <ul class="space-y-4 text-sm font-light text-muted">
-                    <li><a href="contact.html" class="hover:text-gold transition-colors">Contact Us</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-xs tracking-[0.2em] uppercase text-alabaster font-bold mb-6">Contact</h4>
-                <ul class="space-y-4 text-sm font-light text-muted">
-                    <li><span class="block text-alabaster mb-1">Farm Address</span>Chittorgarh, Rajasthan 312001</li>
-                    <li class="pt-2"><span class="block text-alabaster mb-1">Phone</span><a href="tel:+918503830383" class="hover:text-gold transition-colors">+91-8503830383</a></li>
-                </ul>
-            </div>
+            <p class="text-themed-faint text-xs">© 2026 Gaurya Farms. All rights reserved.</p>
         </div>
     </footer>
 
-    <script>
-        const cursorDot = document.getElementById('cursor-dot');
-        const cursorOutline = document.getElementById('cursor-outline');
-        window.addEventListener('mousemove', (e) => {
-            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
-            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 150, fill: "forwards" });
-        });
-        const lenis = new Lenis({ duration: 1.2, smooth: true });
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        <script>
+        // Custom Cursor Logic Optimized
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        if (cursorDot && cursorOutline && typeof gsap !== 'undefined') {
+            const xTo = gsap.quickTo(cursorOutline, "left", {duration: 0.15, ease: "power3"});
+            const yTo = gsap.quickTo(cursorOutline, "top", {duration: 0.15, ease: "power3"});
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX + 'px'; 
+                cursorDot.style.top = e.clientY + 'px';
+                xTo(e.clientX); 
+                yTo(e.clientY);
+            });
+        }
+
+        // Sync Lenis Smooth Scroll
+        const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+        
+        if (typeof ScrollTrigger !== 'undefined') {
+            lenis.on('scroll', ScrollTrigger.update);
+        }
+        
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
         requestAnimationFrame(raf);
         
-        gsap.to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.15, delay: 0.5 });
+        if (typeof gsap !== 'undefined') {
+            gsap.to('.reveal-up', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.15, delay: 0.5 });
+        }
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
